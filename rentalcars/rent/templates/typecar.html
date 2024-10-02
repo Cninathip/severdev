@@ -13,22 +13,25 @@
         <h1 class="title" id="title">Typecar Page</h1>
     </section>
     <div class="container">
-        <table class="table" id="datatable">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for type in types %}
-                <tr>
-                    <td>{{ type.name }}</td>
-                    <td>{{ type.description }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="columns is-multiline">
+            {% for type in types %}
+                <div class="column is-one-quarter">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://media.tenor.com/ldDoV7iwmkgAAAAi/kurukuru-kururing.gif" alt="Placeholder image"/>
+                            </figure>
+                            <div class="media-content has-text-centered">
+                                <p class="title is-4">{{ type.name }}</p>
+                            </div>
+                            <div class="content has-text-centered">
+                                {{ type.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
