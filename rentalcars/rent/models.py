@@ -14,7 +14,7 @@ class Customer(models.Model):
 class Payment(models.Model):
     total_cost = models.IntegerField()
     create_at = models.DateTimeField()
-    pay_at = models.DateTimeField()
+    pay_at = models.DateTimeField(null=True)
     pay_status = models.BooleanField()
 
     def __str__(self):
@@ -51,7 +51,7 @@ class Detail(models.Model):
         return self.name
 
 
-class Vehicle_type(models.Model):
+class VehicleType(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
 
@@ -60,7 +60,7 @@ class Vehicle_type(models.Model):
 
 
 class Vehicle(models.Model):
-    type = models.ForeignKey(Vehicle_type, on_delete=models.PROTECT)
+    type = models.ForeignKey(VehicleType, on_delete=models.PROTECT)
     vehicle_number = models.CharField(max_length=10)
     vehicle_status = models.BooleanField()
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
