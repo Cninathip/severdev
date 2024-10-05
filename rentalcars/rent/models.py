@@ -8,12 +8,12 @@ class Customer(models.Model):
     email = models.EmailField(unique=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
     
 
 class Payment(models.Model):
     total_cost = models.IntegerField()
-    create_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
     pay_at = models.DateTimeField(null=True)
     pay_status = models.BooleanField()
 
@@ -37,7 +37,7 @@ class Employee(models.Model):
     position = models.ForeignKey(Position, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
     
 
 class Detail(models.Model):
@@ -45,7 +45,7 @@ class Detail(models.Model):
     price_per_hour = models.IntegerField()
     price_per_day = models.IntegerField()
     seat = models.IntegerField()
-    price_per_hour = models.CharField()
+    description = models.CharField()
 
     def __str__(self):
         return self.name
@@ -54,6 +54,7 @@ class Detail(models.Model):
 class VehicleType(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='type/', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -61,8 +62,9 @@ class VehicleType(models.Model):
 
 class Vehicle(models.Model):
     type = models.ForeignKey(VehicleType, on_delete=models.PROTECT)
-    vehicle_number = models.CharField(max_length=10)
+    name = models.CharField(max_length=100)
     vehicle_status = models.BooleanField()
+    image = models.ImageField(upload_to='vehicles/', blank=True, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
     detail = models.ForeignKey(Detail, on_delete=models.PROTECT)
 
