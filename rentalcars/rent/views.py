@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth import logout, login
@@ -6,6 +6,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from rent.models import *
 from .forms import *
 from django.http import HttpResponse
+from django.db.models import Q
+from django.utils import timezone
+from django.utils.timezone import make_aware, get_current_timezone
+from datetime import datetime
+from django.shortcuts import render, get_object_or_404, redirect
 
 class Login(View):
     def get(self, request):
@@ -86,11 +91,53 @@ class TypeCarDelete(View):
 
 class CarView(View):
     def get(self, request, pk):
-        cars = Vehicle.objects.filter(type=pk)
+        typecar = VehicleType.objects.get(pk=pk)
+        search_date = request.GET.get("search_date")
+        search_time = request.GET.get("search_time")
+        tz = get_current_timezone()
+        
+        if search_date and search_time:
+            search_datetime = timezone.datetime.strptime(f"{search_date} {search_time}", "%Y-%m-%d %H:%M")
+            search_datetime = make_aware(search_datetime, tz)
+        else:
+            now = datetime.now()
+            search_datetime = make_aware(now, tz)
+
+        print(search_datetime)
+        cars = Vehicle.objects.filter(type=pk).exclude(
+            rent__start_time__lte=search_datetime,
+            rent__end_time__gte=search_datetime
+        )
 
         return render(request, "car.html", {
-            "cars": cars
+            "cars": cars,
+            "search_date": search_date,
+            "search_time": search_time,
+            "pk": pk,
+            "typecar": typecar,
         })
+    
+
+class CarAdd(View):
+    def get(self, request, pk):
+        form = VehicleForm()
+        typecar = get_object_or_404(VehicleType, pk=pk)
+        return render(request, "formcar.html", {
+            "form": form,
+        })
+    
+    def post(self, request, pk):
+        form = VehicleForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('car-list', pk=pk)
+
+        return render(request, "formtypecar.html", {
+            "form": form
+        })
+
+
 
 
 class EmployeeView(View):

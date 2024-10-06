@@ -38,17 +38,6 @@ class Employee(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
-
-class Detail(models.Model):
-    insurance = models.CharField(max_length=100)
-    price_per_hour = models.IntegerField()
-    price_per_day = models.IntegerField()
-    seat = models.IntegerField()
-    description = models.CharField()
-
-    def __str__(self):
-        return self.name
 
 
 class VehicleType(models.Model):
@@ -63,10 +52,14 @@ class VehicleType(models.Model):
 class Vehicle(models.Model):
     type = models.ForeignKey(VehicleType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
-    vehicle_status = models.BooleanField()
     image = models.ImageField(upload_to='vehicles/', blank=True, null=True)
+    insurance = models.CharField(max_length=100)
+    price_per_hour = models.IntegerField()
+    price_per_day = models.IntegerField()
+    seat = models.IntegerField()
+    description = models.CharField(max_length=255, null=True, blank=True)
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
-    detail = models.ForeignKey(Detail, on_delete=models.PROTECT)
+    vehicle_status = models.BooleanField()
 
     def __str__(self):
         return self.name

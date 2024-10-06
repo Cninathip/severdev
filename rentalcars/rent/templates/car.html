@@ -10,11 +10,16 @@
 </head>
 <body>
     <section class="section has-text-centered">
-        <h1 class="title" id="title">Cars List</h1>
+        <h1 class="title" id="title">Cars List ({{ typecar.name }}) </h1>
     </section>
-    <div class="container has-text-right">
-        <a href="" class="button is-success">Add</a>
-    </div>
+    <form method="GET" action="" class="column has-text-centered">
+        <a href=" {% url 'typecar-list' %} " class="button is-danger">Back</a>
+        <input class="input" type="date" id="search_date" name="search_date" style="width: 150px;">
+        <input class="input" type="time" id="search_time" name="search_time" style="width: 95px;">
+        <input class="button" type="submit" value="Search">
+        <a href= "{% url 'car-add' pk %}" class="button is-success">Add</a>
+    </form>
+    
     <div class="container">
         <div class="columns is-multiline">
             {% for car in cars %}
@@ -23,15 +28,19 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                    <img src=" {{ car.image_url }} "/>
+                                    {% if car.image %}
+                                        <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
+                                    {% endif %}
                                 </figure>
                                 <div class="media-content has-text-centered">
                                     <p class="title is-4">{{ car.name }}</p>
                                 </div>
                                 <div class="content">
-                                    <div>{{ car.detail.description }}</div>
-                                    <div>Seat: {{ car.detail.seat }}</div>
-                                    <div class="container has-text-right"><a href="" class="button is-warning is-small ">Rent</a></div>
+                                    <br>
+                                    <div>ที่นั่ง: {{ car.seat }}</div>
+                                    <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
+                                    <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
+                                    <div class="container has-text-right"><a href="" class="button is-warning is-small ">รายละเอียด</a></div>
                             </div>
                             </div>
                         </div>
