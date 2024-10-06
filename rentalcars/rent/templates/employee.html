@@ -2,9 +2,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .column {
+  float: left;
+  width: 50%;
+}
+    </style>
+    <title>Manage Employees</title>
 </head>
 <body>
-    <h1>Employee</h1>
+    <section class="section">
+        <h1 class="title" id="title">Employees</h1>
+    </section>
+    <div class="row">
+        <div class="column">
+            <div class="container pl-5">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <p>
+                        <input type="submit" value="Submit">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+        <div class="column">
+            <div class="container">
+                <div class="container">
+                    <form action="{% url 'employee' %}">
+                        <div class="field">
+                            <div class="control">
+                                <div class="columns">
+                                    <div class="column">
+                                        <input class="input" type="text" name="search" placeholder="Search employee id / employee name">
+                                    </div>
+                                    <div class="column">
+                                        <input class="button" type="submit" value="Search">
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </form>
+                <br/>
+                <table class="table" id="datatable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone number</th>
+                            <th>Email</th>
+                            <th>Position</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in emp%}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i}}</td>
+                            <td>{{i.phone_number}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.position}}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    
 </body>
 </html>

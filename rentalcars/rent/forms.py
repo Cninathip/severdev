@@ -1,5 +1,5 @@
 from django import forms
-from .models import VehicleType, Vehicle
+from .models import *
 from django.forms.widgets import Textarea, TextInput
 
 class VehicleTypeForm(forms.ModelForm):
@@ -22,6 +22,10 @@ class VehicleForm(forms.ModelForm):
             "description": Textarea(attrs={"rows": 5, "class": "textarea"}),
         }
 
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ['first_name', 'last_name', 'phone_number', 'email', 'position']
 
 
 

@@ -144,8 +144,23 @@ class CarAdd(View):
 
 class EmployeeView(View):
     def get(self, request):
-        types = VehicleType.objects.order_by("id")
+        emp = Employee.objects.all().order_by("id")
+        form = EmployeeForm(request.POST)
 
         return render(request, "employee.html", {
-            "types": types
+            "emp": emp,
+            "form": form
+        })
+    
+    def post(self, request):
+        emp = Employee.objects.all().order_by("id")
+        form = EmployeeForm(request.POST)        
+
+        if form.is_valid():
+            form.save()
+            return redirect('typecar-list')
+
+        return render(request, "employee.html", {
+            "emp": emp,
+            "form": form
         })
