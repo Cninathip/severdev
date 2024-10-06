@@ -64,10 +64,10 @@ class Vehicle(models.Model):
     type = models.ForeignKey(VehicleType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
     vehicle_status = models.BooleanField()
+    vehicle_number = models.CharField(max_length=10)
     image = models.ImageField(upload_to='vehicles/', blank=True, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
     detail = models.ForeignKey(Detail, on_delete=models.PROTECT)
-    vehicle_number = models.IntegerField(max_length=10)
 
     def __str__(self):
         return self.name
