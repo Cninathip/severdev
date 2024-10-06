@@ -124,6 +124,7 @@ class CarAdd(View):
         typecar = get_object_or_404(VehicleType, pk=pk)
         return render(request, "formcar.html", {
             "form": form,
+            "pk":pk
         })
     
     def post(self, request, pk):
@@ -134,7 +135,8 @@ class CarAdd(View):
             return redirect('car-list', pk=pk)
 
         return render(request, "formtypecar.html", {
-            "form": form
+            "form": form,
+            "pk":pk
         })
 
 
