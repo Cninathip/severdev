@@ -20,82 +20,52 @@
     <title>Manage Employees</title>
 </head>
 <body>
-<<<<<<< HEAD
     <section class="section">
         <h1 class="title" id="title">Employees</h1>
     </section>
-    <div class="row">
-        <div class="column">
-            <div class="container pl-5">
-                <form method="POST">
-                    {% csrf_token %}
-                    {{form}}
-                    <p>
-                        <input type="submit" value="Submit">
-                    </p>
-                </form>
-            </div>
+    <div class="column">
+        <div class="container pl-5">
+            <form method="POST">
+                {% csrf_token %}
+                {{form}}
+                <br>
+                <input class="button" type="submit" value="Add">
+            </form>
         </div>
     </div>
-        </div>
-        <div class="column">
-            <div class="container">
-                <div class="container">
-                    <form action="{% url 'employee' %}">
-                        <div class="field">
-                            <div class="control">
-                                <div class="columns">
-                                    <div class="column">
-                                        <input class="input" type="text" name="search" placeholder="Search employee id / employee name">
-                                    </div>
-                                    <div class="column">
-                                        <input class="button" type="submit" value="Search">
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                    </form>
-                <br/>
-                <table class="table" id="datatable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Phone number</th>
-                            <th>Email</th>
-                            <th>Position</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in emp%}
-                        <tr>
-                            <td>{{i.id}}</td>
-                            <td>{{i}}</td>
-                            <td>{{i.phone_number}}</td>
-                            <td>{{i.email}}</td>
-                            <td>{{i.position}}</td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-      </div>
-    
-=======
-    <nav class="navbar has-background-info"> 
-        <div class="navbar-menu-class navbar-end">
-            <div class="navbar-end">
-                <a class="navbar-item" href=""> 
-                    <img src= "https://cdn.creazilla.com/icons/3251108/person-icon-md.png" style="width: 100%; height: auto;"> 
-                </a>
-            </div>
-        </div>
-      </nav>
 
-    <h1>Employee</h1>
->>>>>>> 92eee85ea19033bf57caa4d0c50156e57b8031dc
+    <div class="column">
+        <div class="container">
+            <form action="{% url 'employee' %}">
+                <input class="input" type="text" name="search_id" placeholder="Search employee id / employee name" style="width: 300px;">
+                <input class="button" type="submit" value="Search">
+            </form>
+            <table class="table" id="datatable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in emp%}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.position}}</td>
+                        <td><a class="button is-warning" href="{% url 'employee' %}">Kick</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
 </body>
 </html>

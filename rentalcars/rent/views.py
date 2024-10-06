@@ -144,8 +144,15 @@ class CarAdd(View):
 
 class EmployeeView(View):
     def get(self, request):
+        search = request.GET
         emp = Employee.objects.all().order_by("id")
         form = EmployeeForm(request.POST)
+
+        if search.get("search"):
+            emp = Employee.filter(
+                # first_name__icontains=search.get("search"),
+                id__icontains=search.get("search")
+            )
 
         return render(request, "employee.html", {
             "emp": emp,
