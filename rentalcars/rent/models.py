@@ -67,6 +67,7 @@ class Vehicle(models.Model):
     image = models.ImageField(upload_to='vehicles/', blank=True, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
     detail = models.ForeignKey(Detail, on_delete=models.PROTECT)
+    vehicle_number = models.IntegerField(max_length=10)
 
     def __str__(self):
         return self.name
