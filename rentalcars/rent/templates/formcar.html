@@ -47,6 +47,14 @@
                         </div>
 
                         <div class="field">
+                            {{ form.number.errors }}
+                            <label class="label" for="{{ form.name.id_for_label }}">Vehicle Number</label>
+                            <div class="control">
+                                {{ form.number }}
+                            </div>
+                        </div>
+
+                        <div class="field">
                             {{ form.description.errors }}
                             <label class="label" for="{{ form.description.id_for_label }}">Description</label>
                             <div class="control">

@@ -16,9 +16,10 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = ['type', 'name', 'image', 'price_per_hour', 'price_per_day', 'insurance'
-                  , 'seat', 'description', 'employee', 'vehicle_status']
+                  , 'seat', 'description', 'employee', 'vehicle_status', 'number']
         widgets = {
             "name": TextInput(attrs={"class": "input"}),
+            "number": TextInput(attrs={"class": "input"}),
             "description": Textarea(attrs={"rows": 3, "class": "textarea"}),
         }
 
