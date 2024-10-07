@@ -15,9 +15,6 @@
 </head>
 
 <body>
-    <section class="section">
-        <h1 class="title" id="title">Employees</h1>
-    </section>
     <div class="columns">
 
         <aside class="column is-narrow" style="width: 200px; background-color: rgb(237, 212, 167); height: 100vh;">
@@ -36,7 +33,10 @@
         </aside>
 
         <div class="column">
-            <div class="container pl-5 has-text-centered">
+            <section class="section">
+                <h1 class="title" id="title">Employees</h1>
+            </section>
+            <div class="container pl-5">
                 <form method="POST">
                     {% csrf_token %}
                     {{form}}

@@ -52,6 +52,7 @@ class VehicleType(models.Model):
 class Vehicle(models.Model):
     type = models.ForeignKey(VehicleType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
+    number = models.CharField(max_length=10)
     image = models.ImageField(upload_to='vehicles/', blank=True, null=True)
     insurance = models.CharField(max_length=100)
     price_per_hour = models.IntegerField()

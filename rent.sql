@@ -23,10 +23,10 @@ INSERT INTO rent_vehicleType (name, description, image) VALUES
 ('Truck', 'Large vehicle for transporting goods', 'truck.jpg');
 
 -- ข้อมูลสำหรับตาราง Vehicle (รถยนต์)
-INSERT INTO rent_vehicle (type_id, name, image, insurance, price_per_hour, price_per_day, seat, description, employee_id, vehicle_status) VALUES
-(1, 'Toyota Camry', 'camry.jpg', 'Full Coverage', 200, 1500, 5, 'Comfortable sedan', 1, TRUE),
-(2, 'Ford Explorer', 'explorer.jpg', 'Full Coverage', 300, 2000, 7, 'Spacious SUV', 2, TRUE),
-(3, 'Isuzu D-Max', 'dmax.jpg', 'Third-Party Only', 150, 1000, 2, 'Powerful truck for transport', 3, FALSE);
+INSERT INTO rent_vehicle (type_id, name, image, insurance, price_per_hour, price_per_day, seat, description, employee_id, vehicle_status, number) VALUES
+(1, 'Toyota Camry', 'camry.jpg', 'Full Coverage', 200, 1500, 5, 'Comfortable sedan', 1, TRUE, '1123a'),
+(2, 'Ford Explorer', 'explorer.jpg', 'Full Coverage', 300, 2000, 7, 'Spacious SUV', 2, TRUE, '1123b'),
+(3, 'Isuzu D-Max', 'dmax.jpg', 'Third-Party Only', 150, 1000, 2, 'Powerful truck for transport', 3, FALSE, '1123c');
 
 -- ข้อมูลสำหรับตาราง Payment (การชำระเงิน)
 INSERT INTO rent_payment (total_cost, created_at, pay_at, pay_status) VALUES
