@@ -10,11 +10,6 @@
             border-collapse: collapse;
             margin-top: 20px;
         }
-
-        .column {
-            float: left;
-            width: 10vw;
-        }
     </style>
     <title>Manage Employees</title>
 </head>
@@ -39,62 +34,53 @@
                 <a href="" class="button is-danger">Logout</a>
             </div>
         </aside>
-    </div>
-    <div class="column">
-        <div class="container pl-5">
-            <form method="POST">
-                {% csrf_token %}
-                {{form}}
-                <br>
-                <input class="button" type="submit" value="Add">
-            </form>
+
+        <div class="column">
+            <div class="container pl-5 has-text-centered">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <br>
+                    <input class="button" type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="container has-text-centered">
+                <form action="{% url 'employee' %}">
+                    <input class="input" type="text" name="search_id" placeholder="Search employee id / employee name"
+                        style="width: 300px;">
+                    <input class="button" type="submit" value="Search">
+                </form>
+                <table class="table" id="datatable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone number</th>
+                            <th>Email</th>
+                            <th>Position</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in emp%}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i}}</td>
+                            <td>{{i.phone_number}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.position}}</td>
+                            <td><a class="button is-warning" href="{% url 'employee' %}">Kick</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <div class="column">
-        <div class="container">
-            <form action="{% url 'employee' %}">
-
-                <input class="button" type="submit" value="Add">
-            </form>
-        </div>
-    </div>
-
-    <div class="column">
-        <div class="container">
-            <form action="{% url 'employee' %}">
-                <input class="input" type="text" name="search_id" placeholder="Search employee id / employee name"
-                    style="width: 300px;">
-                <input class="input" type="text" name="search" placeholder="Search employee id / employee name"
-                    style="width: 300px;">
-                <input class="button" type="submit" value="Search">
-            </form>
-            <table class="table" id="datatable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone number</th>
-                        <th>Email</th>
-                        <th>Position</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in emp%}
-                    <tr>
-                        <td>{{i.id}}</td>
-                        <td>{{i}}</td>
-                        <td>{{i.phone_number}}</td>
-                        <td>{{i.email}}</td>
-                        <td>{{i.position}}</td>
-                        <td><a class="button is-warning" href="{% url 'employee' %}">Kick</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 </body>
 
