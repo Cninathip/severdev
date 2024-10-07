@@ -116,7 +116,18 @@ class CarView(View):
             "pk": pk,
             "typecar": typecar,
         })
+    def post(self, request, pk):
+        car = Vehicle.objects.get(pk=pk)
+        return render(request, "cardetail.html"),{
+            "car": car
+        }
     
+class CarDetailView(View):
+    def get(self, request, pk):
+        car = Vehicle.objects.get(pk=pk)
+        return render(request, "cardetail.html"),{
+            "car": car
+        }
 
 class CarAdd(View):
     def get(self, request, pk):

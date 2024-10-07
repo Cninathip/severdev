@@ -1,17 +1,17 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <title>TCars</title>
 </head>
+
 <body>
     <div class="columns">
 
-        <aside class="column is-narrow" style="width: 200px; background-color: rgb(237, 212, 167); height: 102vh; position: fixed;">
+        <aside class="column is-narrow"
+            style="width: 200px; background-color: rgb(237, 212, 167); height: 102vh; position: fixed;">
             <div class="menu has-text-centered">
                 <br>
                 <section>
@@ -35,19 +35,20 @@
                 <input class="input" type="date" id="search_date" name="search_date" style="width: 150px;">
                 <input class="input" type="time" id="search_time" name="search_time" style="width: 95px;">
                 <input class="button" type="submit" value="Search">
-                <a href= "{% url 'car-add' pk %}" class="button is-success">Add</a>
+                <a href="{% url 'car-add' pk %}" class="button is-success">Add</a>
             </form>
-            
+
             <div class="container">
                 <div class="columns is-multiline">
                     {% for car in cars %}
-                        <div class="column is-one-fifth">
-                            <a href="">
-                                <div class="card">
+                    <div class="column is-one-fifth">
+                        <a href="">
+                            <div class="card">
+                                <a href="{% url 'car-detail' car.id %}">
                                     <div class="card-image">
                                         <figure class="image is-4by3">
                                             {% if car.image %}
-                                                <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
+                                            <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
                                             {% endif %}
                                         </figure>
                                         <div class="media-content has-text-centered">
@@ -58,16 +59,20 @@
                                             <div>ที่นั่ง: {{ car.seat }}</div>
                                             <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
                                             <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
-                                            <div class="container has-text-right"><a href="" class="button is-warning is-small ">รายละเอียด</a></div>
+                                            <div class="container has-text-right"><a href=""
+                                                    class="button is-warning is-small ">รายละเอียด</a></div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+
+                            </div>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
