@@ -8,7 +8,7 @@ class VehicleTypeForm(forms.ModelForm):
         fields = ['name', 'description', 'image']
         widgets = {
             "name": TextInput(attrs={"class": "input"}),
-            "description": Textarea(attrs={"rows": 5, "class": "textarea"})
+            "description": Textarea(attrs={"rows": 3, "class": "textarea"})
         }
 
 
@@ -19,7 +19,7 @@ class VehicleForm(forms.ModelForm):
                   , 'seat', 'description', 'employee', 'vehicle_status']
         widgets = {
             "name": TextInput(attrs={"class": "input"}),
-            "description": Textarea(attrs={"rows": 5, "class": "textarea"}),
+            "description": Textarea(attrs={"rows": 3, "class": "textarea"}),
         }
 
 

@@ -9,52 +9,62 @@
     <title>Typecar</title>
 </head>
 <body>
+    <div class="columns">
 
-    <nav class="navbar has-background-info"> 
-        <div class="navbar-menu-class navbar-end">
-            <div class="navbar-end">
-                <a class="navbar-item" href=""> 
-                    <img src= "https://cdn.creazilla.com/icons/3251108/person-icon-md.png" style="width: 100%; height: auto;"> 
-                </a>
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(237, 212, 167); height: 102vh; position: fixed;">
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href=""><img src="/media/person-circle.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p><b>Hello User</b></p>
+                </div>
+                <br>
+                <a href="" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+    
+        <div class="column" style="margin: 20px; margin-left: 230px;">
+            <section class="section has-text-centered">
+                <h1 class="title" id="title">Rental Cars</h1>
+            </section>
+            <div class="container has-text-centered">
+                <a href="{% url 'typecar-add' %}" class="button is-success">Add</a>
+                <a href="{% url 'employee' %}" class="button is-warning">Manage Employee</a>
+            </div>
+            <div class="container"  style="margin-top: 20px;">
+                <div class="columns is-multiline">
+                    {% for type in types %}
+                        <div class="column is-one-quarter">
+                            <a href="{% url 'car-list' type.id %}">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <figure class="image is-4by3">
+                                            {% if type.image %}
+                                            <img src="{{ type.image.url }}" style="width: 100%; height: auto;">"
+                                            {% endif %}
+                                        </figure>
+                                        <div class="media-content has-text-centered">
+                                            <p class="title is-4">{{ type.name }}</p>
+                                        </div>
+                                        <div class="content has-text-centered">
+                                            {{ type.description }}
+                                        </div>
+                                        <div class="has-text-right"> 
+                                            <a class="button is-warning" href="{% url 'typecar-update' type.id %}">Edit</a>
+                                            <a class="button is-danger" href="{% url 'typecar-delete' type.id %}">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-      </nav>
-
-    <section class="section has-text-centered">
-        <h1 class="title" id="title">Rental Cars</h1>
-    </section>
-    <div class="container has-text-right">
-        <a href="{% url 'typecar-add' %}" class="button is-success">Add</a>
-        <a href="{% url 'employee' %}" class="button is-warning">Manage Employee</a>
-    </div>
-    <div class="container">
-        <div class="columns is-multiline">
-            {% for type in types %}
-                <div class="column is-one-quarter">
-                    <a href="{% url 'car-list' type.id %}">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-4by3">
-                                    {% if type.image %}
-                                    <img src="{{ type.image.url }}" style="width: 100%; height: auto;">"
-                                    {% endif %}
-                                </figure>
-                                <div class="media-content has-text-centered">
-                                    <p class="title is-4">{{ type.name }}</p>
-                                </div>
-                                <div class="content has-text-centered">
-                                    {{ type.description }}
-                                </div>
-                                <div class="has-text-right"> 
-                                    <a class="button is-warning" href="{% url 'typecar-update' type.id %}">Edit</a>
-                                    <a class="button is-danger" href="{% url 'typecar-delete' type.id %}">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        
     </div>
 </body>
 </html>

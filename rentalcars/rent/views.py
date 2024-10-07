@@ -121,7 +121,6 @@ class CarView(View):
 class CarAdd(View):
     def get(self, request, pk):
         form = VehicleForm()
-        typecar = get_object_or_404(VehicleType, pk=pk)
         return render(request, "formcar.html", {
             "form": form,
             "pk":pk
@@ -134,7 +133,7 @@ class CarAdd(View):
             form.save()
             return redirect('car-list', pk=pk)
 
-        return render(request, "formtypecar.html", {
+        return render(request, "formcar.html", {
             "form": form,
             "pk":pk
         })

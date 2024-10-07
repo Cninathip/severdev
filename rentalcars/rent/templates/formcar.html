@@ -9,114 +9,132 @@
     <title>Typecar</title>
 </head>
 <body>
-    <nav class="navbar has-background-info"> 
-        <div class="navbar-menu-class navbar-end">
-            <div class="navbar-end">
-                <a class="navbar-item" href=""> 
-                    <img src= "https://cdn.creazilla.com/icons/3251108/person-icon-md.png" style="width: 100%; height: auto;"> 
-                </a>
+    <div class="columns">
+
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(237, 212, 167); height: 102vh; position: fixed;">
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href=""><img src="/media/person-circle.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p><b>Hello User</b></p>
+                </div>
+                <br>
+                <a href="" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+
+        <div class="column" style="margin: 20px; margin-left: 230px;">
+            <section class="section">
+                <h1 class="title" id="title">Add New Vehicle /Edit Vehicle</h1>
+            </section>
+            <div class="container pl-5">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+        
+                    {{ form.non_field_errors }}
+                <div class="columns">
+                    <!-- col1    -->
+                    <div class="column">
+                        <div class="field">
+                            {{ form.name.errors }}
+                            <label class="label" for="{{ form.name.id_for_label }}">Vehicle Name</label>
+                            <div class="control">
+                                {{ form.name }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            {{ form.description.errors }}
+                            <label class="label" for="{{ form.description.id_for_label }}">Description</label>
+                            <div class="control">
+                                {{ form.description }}
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            {{ form.type.errors }}
+                            <label class="label" for="{{ form.type.id_for_label }}">Vehicle Type</label>
+                            <div class="control">
+                                {{ form.type }}
+                            </div>
+                        </div>
+            
+                        <div class="field">
+                            {{ form.vehicle_status.errors }}
+                            <label class="label" for="{{ form.vehicle_status.id_for_label }}">Status</label>
+                            <div class="control">
+                                {{ form.vehicle_status }}
+                            </div>
+                        </div>
+                
+                        <div class="field">
+                            {{ form.image.errors }}
+                            <label class="label" for="{{ form.image.id_for_label }}">Upload Image</label>
+                            <div class="control">
+                                {{ form.image }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- col2 -->
+                    <div class="column">
+                        <div class="field">
+                            {{ form.employee.errors }}
+                            <label class="label" for="{{ form.employee.id_for_label }}">Employee</label>
+                            <div class="control">
+                                {{ form.employee }}
+                            </div>
+                        </div>
+            
+                        <div class="field">
+                            {{ form.insurance.errors }}
+                            <label class="label" for="{{ form.insurance.id_for_label }}">Insurance</label>
+                            <div class="control">
+                                {{ form.insurance }}
+                            </div>
+                        </div>
+            
+                        <div class="field">
+                            {{ form.price_per_hour.errors }}
+                            <label class="label" for="{{ form.price_per_hour.id_for_label }}">Price per Hour</label>
+                            <div class="control">
+                                {{ form.price_per_hour }}
+                            </div>
+                        </div>
+            
+                        <div class="field">
+                            {{ form.price_per_day.errors }}
+                            <label class="label" for="{{ form.price_per_day.id_for_label }}">Price per Day</label>
+                            <div class="control">
+                                {{ form.price_per_day }}
+                            </div>
+                        </div>
+            
+                        <div class="field">
+                            {{ form.seat.errors }}
+                            <label class="label" for="{{ form.seat.id_for_label }}">Seat</label>
+                            <div class="control">
+                                {{ form.seat }}
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <input type="submit" class="button is-success" value="Save">
+                            </div>
+                            <div class="control">
+                                <a class="button is-danger" href="{% url 'car-list' pk %}">Back</a>
+                            </div>
+                        </div>
+                    </div> 
+                    </div>
+                </form>
             </div>
         </div>
-      </nav>
-    <section class="section">
-        <h1 class="title" id="title">Add New Vehicle /Edit Vehicle</h1>
-    </section>
-    <div class="container pl-5">
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            {{ form.non_field_errors }}
-            
-            <div class="field">
-                {{ form.type.errors }}
-                <label class="label" for="{{ form.type.id_for_label }}">Vehicle Type</label>
-                <div class="control">
-                    {{ form.type }}
-                </div>
-            </div>
-            
-            <div class="field">
-                {{ form.name.errors }}
-                <label class="label" for="{{ form.name.id_for_label }}">Vehicle Name</label>
-                <div class="control">
-                    {{ form.name }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.vehicle_status.errors }}
-                <label class="label" for="{{ form.vehicle_status.id_for_label }}">Status</label>
-                <div class="control">
-                    {{ form.vehicle_status }}
-                </div>
-            </div>
-    
-            <div class="field">
-                {{ form.image.errors }}
-                <label class="label" for="{{ form.image.id_for_label }}">Upload Image</label>
-                <div class="control">
-                    {{ form.image }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.employee.errors }}
-                <label class="label" for="{{ form.employee.id_for_label }}">Employee</label>
-                <div class="control">
-                    {{ form.employee }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.insurance.errors }}
-                <label class="label" for="{{ form.insurance.id_for_label }}">Insurance</label>
-                <div class="control">
-                    {{ form.insurance }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.price_per_hour.errors }}
-                <label class="label" for="{{ form.price_per_hour.id_for_label }}">Price per Hour</label>
-                <div class="control">
-                    {{ form.price_per_hour }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.price_per_day.errors }}
-                <label class="label" for="{{ form.price_per_day.id_for_label }}">Price per Day</label>
-                <div class="control">
-                    {{ form.price_per_day }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.seat.errors }}
-                <label class="label" for="{{ form.seat.id_for_label }}">Seat</label>
-                <div class="control">
-                    {{ form.seat }}
-                </div>
-            </div>
-
-            <div class="field">
-                {{ form.description.errors }}
-                <label class="label" for="{{ form.description.id_for_label }}">Description</label>
-                <div class="control">
-                    {{ form.description }}
-                </div>
-            </div>
-    
-            <div class="field is-grouped">
-                <div class="control">
-                    <input type="submit" class="button is-success" value="Save">
-                </div>
-                <div class="control">
-                    <a class="button is-danger" href="{% url 'car-list' pk %}">Back</a>
-                </div>
-            </div>
-        </form>
     </div>
-    
 </body>
 </html>

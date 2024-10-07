@@ -9,55 +9,64 @@
     <title>TCars</title>
 </head>
 <body>
+    <div class="columns">
 
-    <nav class="navbar has-background-info"> 
-        <div class="navbar-menu-class navbar-end">
-            <div class="navbar-end">
-                <a class="navbar-item" href=""> 
-                    <img src= "https://cdn.creazilla.com/icons/3251108/person-icon-md.png" style="width: 100%; height: auto;"> 
-                </a>
-            </div>
-        </div>
-      </nav>
-
-    <section class="section has-text-centered">
-        <h1 class="title" id="title">Cars List ({{ typecar.name }}) </h1>
-    </section>
-    <form method="GET" action="" class="column has-text-centered">
-        <a href=" {% url 'typecar-list' %} " class="button is-danger">Back</a>
-        <input class="input" type="date" id="search_date" name="search_date" style="width: 150px;">
-        <input class="input" type="time" id="search_time" name="search_time" style="width: 95px;">
-        <input class="button" type="submit" value="Search">
-        <a href= "{% url 'car-add' pk %}" class="button is-success">Add</a>
-    </form>
-    
-    <div class="container">
-        <div class="columns is-multiline">
-            {% for car in cars %}
-                <div class="column is-one-fifth">
-                    <a href="">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-4by3">
-                                    {% if car.image %}
-                                        <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
-                                    {% endif %}
-                                </figure>
-                                <div class="media-content has-text-centered">
-                                    <p class="title is-4">{{ car.name }}</p>
-                                </div>
-                                <div class="content">
-                                    <br>
-                                    <div>ที่นั่ง: {{ car.seat }}</div>
-                                    <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
-                                    <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
-                                    <div class="container has-text-right"><a href="" class="button is-warning is-small ">รายละเอียด</a></div>
-                            </div>
-                            </div>
-                        </div>
-                    </a>
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(237, 212, 167); height: 102vh; position: fixed;">
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href=""><img src="/media/person-circle.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p><b>Hello User</b></p>
                 </div>
-            {% endfor %}
+                <br>
+                <a href="" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+
+        <div class="column" style="margin: 20px; margin-left: 230px;">
+            <section class="section has-text-centered">
+                <h1 class="title" id="title">Cars List ({{ typecar.name }}) </h1>
+            </section>
+            <form method="GET" action="" class="column has-text-centered">
+                <a href=" {% url 'typecar-list' %} " class="button is-danger">Back</a>
+                <input class="input" type="date" id="search_date" name="search_date" style="width: 150px;">
+                <input class="input" type="time" id="search_time" name="search_time" style="width: 95px;">
+                <input class="button" type="submit" value="Search">
+                <a href= "{% url 'car-add' pk %}" class="button is-success">Add</a>
+            </form>
+            
+            <div class="container">
+                <div class="columns is-multiline">
+                    {% for car in cars %}
+                        <div class="column is-one-fifth">
+                            <a href="">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <figure class="image is-4by3">
+                                            {% if car.image %}
+                                                <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
+                                            {% endif %}
+                                        </figure>
+                                        <div class="media-content has-text-centered">
+                                            <p class="title is-4">{{ car.name }}</p>
+                                        </div>
+                                        <div class="content">
+                                            <br>
+                                            <div>ที่นั่ง: {{ car.seat }}</div>
+                                            <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
+                                            <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
+                                            <div class="container has-text-right"><a href="" class="button is-warning is-small ">รายละเอียด</a></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </body>
