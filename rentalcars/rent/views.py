@@ -22,18 +22,21 @@ class Login(View):
         if form.is_valid():
             user = form.get_user() 
             login(request,user)
-            return redirect('typecar')  
+            return redirect('typecar-list')  
 
         return render(request,'login.html', {"form":form})
 
 
 class Logout(View):
+    login_url = "/login/"
     def get(self, request):
         logout(request)
         return redirect('login')
     
 
-class TypeCarView(View):
+class TypeCarView(LoginRequiredMixin, View):
+    login_url = "/login/"
+    
     def get(self, request):
         types = VehicleType.objects.order_by("id")
 
@@ -147,8 +150,6 @@ class CarAdd(View):
             "form": form,
             "pk":pk
         })
-
-
 
 
 class EmployeeView(View):
