@@ -9,7 +9,11 @@
 
 <body>
     <div class="columns">
+        
         <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+            <div style="padding: 10px;">
+                <a href="{% url 'car-list' car.type.id%}" class="button is-danger">Back</a>
+            </div>
             <div class="menu has-text-centered">
                 <br>
                 <section>
@@ -17,7 +21,7 @@
                 </section>
                 <br>
                 <div class="item">
-                    <p style="color: white;"><b>Hello {{user.username}}</b></p>
+                    <p style="color: white;"><b>{{user.username}}</b></p>
                 </div>
                 <br>
                 <a href="" class="button is-danger">Logout</a>
@@ -48,7 +52,6 @@
                     <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
                     <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
                     <br>
-                    <a href="{% url 'car-list' car.type.id%}" class="button is-danger">Back</a>
                     <a href="" class="button is-success">Rent</a>
                     <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
                 </div>

@@ -18,7 +18,12 @@
 <body>
     <div class="columns">
         <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+            
+            <div style="padding: 10px;">
+                <a class="button is-danger" href="{% url 'typecar-list' %}">Back</a>
+            </div>
             <div class="menu has-text-centered">
+                
                 <br>
                 <section>
                     <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
@@ -39,6 +44,7 @@
         <div class="column"  style="padding-left: 300px;">
             <section class="section">
                 <h1 class="title" id="title">Renting list</h1>
+
             </section>
             <br>
             <div class="container has-text-centered">
@@ -67,8 +73,17 @@
                             <td>{{i.customer}}</td>
                             <td>{{i.start_time}}</td>
                             <td>{{i.end_time}}</td>
-                            <td>{{i.return_status}}</td>
-                            <td><a class="button is-warning" href="">detail</a></td>
+                            <td>
+                                {% if i.return_status %}
+                                rented
+                                {% else %}
+                                renting
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="button is-danger" href="">cancle</a>
+                                <a class="button is-success" href="">approve</a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
