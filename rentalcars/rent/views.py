@@ -203,3 +203,8 @@ class EmployeeView(View):
             "emp": emp,
             "form": form
         })
+    
+class ProfileView(View):
+    def get(self, request):
+        rent = Rent.objects.all()
+        return render(request, "profile.html")
