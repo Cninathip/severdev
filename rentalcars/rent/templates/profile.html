@@ -13,7 +13,7 @@
             margin-top: 20px;
         }
     </style>
-    <title>Document</title>
+    <title>Profile</title>
 </head>
 <body>
     <div class="columns">
@@ -34,7 +34,7 @@
                     <br>
                     <p style="color: white;">{{user.email}}</p>
                     <br>
-                    <a href="" class="button is-warning">Change password</a>
+                    <a href="{% url 'changepassword' %}" class="button is-warning">Change password</a>
                 </div>
                 <br>
                 <a href="{% url 'logout' %}" class="button is-danger">Logout</a>

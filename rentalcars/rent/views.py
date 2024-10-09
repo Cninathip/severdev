@@ -209,3 +209,8 @@ class ProfileView(View):
         rent = Rent.objects.all()
         context = {"rent": rent}
         return render(request, "profile.html", context)
+    
+class ChangePasswordView(View):
+    def get(self, request):
+        form = AuthenticationForm()
+        return render(request, "changepassword.html", {"form": form})
