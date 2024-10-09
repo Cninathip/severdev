@@ -75,7 +75,7 @@ class Rent(models.Model):
     return_status = models.BooleanField()
 
     def __str__(self):
-        return self.name
+        return self.vehicle
     
 
 

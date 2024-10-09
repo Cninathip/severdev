@@ -207,4 +207,5 @@ class EmployeeView(View):
 class ProfileView(View):
     def get(self, request):
         rent = Rent.objects.all()
-        return render(request, "profile.html")
+        context = {"rent": rent}
+        return render(request, "profile.html", context)

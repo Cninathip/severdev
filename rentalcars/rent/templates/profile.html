@@ -6,26 +6,75 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
     >
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>
     <div class="columns">
-
-        <div class="columns">
-            <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
-                <div class="menu has-text-centered">
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p style="color: white;"><b>{{user.username}}</b></p>
                     <br>
-                    <section>
-                        <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
-                    </section>
+                    <p style="color: white;">{{user.email}}</p>
                     <br>
-                    <div class="item">
-                        <p style="color: white;"><b>Hello User</b></p>
-                    </div>
-                    <br>
-                    <a href="" class="button is-danger">Logout</a>
+                    <a href="" class="button is-warning">Change password</a>
                 </div>
-            </aside>
+                <br>
+                <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+
+        <div class="column"  style="padding-left: 300px;">
+            <section class="section">
+                <h1 class="title" id="title">Renting list</h1>
+            </section>
+            <br>
+            <div class="container has-text-centered">
+                <form action="{% url 'employee' %}">
+                    <input class="input" type="text" name="search_id" placeholder="Search car"
+                        style="width: 300px;">
+                    <input class="button" type="submit" value="Search">
+                </form>
+                <table class="table" id="datatable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Vehicle</th>
+                            <th>Customer</th>
+                            <th>Start time</th>
+                            <th>End time</th>
+                            <th>Return status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in rent%}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.vehicle}} {{i.vehicle.number}}</td>
+                            <td>{{i.customer}}</td>
+                            <td>{{i.start_time}}</td>
+                            <td>{{i.end_time}}</td>
+                            <td>{{i.return_status}}</td>
+                            <td><a class="button is-warning" href="">detail</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>
