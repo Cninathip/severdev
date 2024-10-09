@@ -50,7 +50,7 @@
                     <br>
                     <a href="{% url 'car-list' car.type.id%}" class="button is-warning is-small ">Back</a>
                     <a href="" class="button is-warning is-small ">Rent</a>
-                    <a href="" class="button is-warning is-small ">Edit</a>
+                    <a href="{% url 'car-edit' car.id %}" class="button is-warning is-small ">Edit</a>
                 </div>
         </div>
     </div>

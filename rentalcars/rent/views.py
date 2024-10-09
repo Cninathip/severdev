@@ -130,6 +130,28 @@ class CarDetailView(View):
         car = Vehicle.objects.get(pk=pk)
         context = {"car": car}
         return render(request, "cardetail.html", context)
+    
+class CarEditView(View):
+    def get(self, request, pk):
+        car = Vehicle.objects.get(pk=pk)
+        form = VehicleForm(instance=car)
+        return render(request, "formcar.html", {
+            "form": form,
+            "pk":pk
+        })
+    
+    def post(self, request, pk):
+        car = Vehicle.objects.get(pk=pk)
+        form = VehicleForm(request.POST, request.FILES, instance=car)
+
+        if form.is_valid():
+            form.save()
+            return redirect('car-detail', pk=pk)
+
+        return render(request, "formcar.html", {
+            "form": form,
+            "pk":pk
+        })
 
 class CarAdd(View):
     def get(self, request, pk):

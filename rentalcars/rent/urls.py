@@ -8,6 +8,7 @@ urlpatterns = [
     path("typecar-update/<int:pk>", views.TypeCarUpdate.as_view(), name="typecar-update"),
     path("<int:pk>", views.CarView.as_view(), name="car-list"),
     path("detail/<int:pk>", views.CarDetailView.as_view(), name="car-detail"),
+    path("detail/<int:pk>/edit", views.CarEditView.as_view(), name="car-edit"),
     path("<int:pk>/car-add", views.CarAdd.as_view(), name="car-add"),
     path("employee", views.EmployeeView.as_view(), name="employee"),
 ]
