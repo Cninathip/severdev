@@ -34,6 +34,27 @@ class Logout(View):
         return redirect('login')
     
 
+class Register(View):
+    def get(self, request):
+        form = RegisterForm()
+        return render(request, 'register.html', {"form": form})
+    
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Customer.objects.create(
+                first_name = form.cleaned_data["first_name"],
+                last_name = form.cleaned_data["last_name"],
+                email = form.cleaned_data["email"],
+                phone_number = request.POST.get("phone_number")
+            )
+
+            login(request, user)
+            return redirect('typecar-list')
+        return render(request, 'register.html', {"form": form})   
+    
+
 class TypeCarView(LoginRequiredMixin, View):
     login_url = "/login/"
     
@@ -100,7 +121,7 @@ class CarView(View):
         tz = get_current_timezone()
         
         if search_date and search_time:
-            search_datetime = timezone.datetime.strptime(f"{search_date} {search_time}", "%Y-%m-%d %H:%M")
+            search_datetime = datetime.strptime(f"{search_date} {search_time}", '%Y-%m-%d %H:%M')
             search_datetime = make_aware(search_datetime, tz)
         else:
             now = datetime.now()
