@@ -41,6 +41,11 @@ class RegisterForm(UserCreationForm):
             "last_name": TextInput(attrs={"class": "input"}),
         }
 
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput())
+    new_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
+
 
     
 

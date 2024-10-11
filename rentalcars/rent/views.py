@@ -2,7 +2,7 @@
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth import logout, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rent.models import *
 from .forms import *
 from django.http import HttpResponse
@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.utils.timezone import make_aware, get_current_timezone
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 class Login(View):
     def get(self, request):
@@ -52,8 +54,24 @@ class Register(View):
 
             login(request, user)
             return redirect('typecar-list')
-        return render(request, 'register.html', {"form": form})   
+        return render(request, 'register.html', {"form": form})
     
+class ChangePasswordView(PasswordChangeView):
+    def get(self, request):
+        form = ChangePasswordForm
+        return render(request, "changepassword.html", {"form": form})
+    
+    def post(self, request):
+        form = ChangePasswordForm(data=request.POST)
+        # if form.is_valid():
+        if User.check_password(form.cleaned_data["old_password"]):
+            print("yes")
+            return redirect('profile')
+        else:
+            print("no")
+            return redirect('profile')
+
+        
 
 class TypeCarView(LoginRequiredMixin, View):
     login_url = "/login/"
@@ -230,8 +248,3 @@ class ProfileView(View):
         rent = Rent.objects.all()
         context = {"rent": rent}
         return render(request, "profile.html", context)
-    
-class ChangePasswordView(View):
-    def get(self, request):
-        form = AuthenticationForm()
-        return render(request, "changepassword.html", {"form": form})
