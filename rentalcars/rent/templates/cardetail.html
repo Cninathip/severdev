@@ -5,12 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <title>Detail</title>
+
+    <style>
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+        }
+    </style>
+    <script>
+        function openCity(evt, attr) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementById("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(attr).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </head>
 
 <body>
     <div class="columns">
-        
-        <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+
+        <aside class="column is-narrow"
+            style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
             <div style="padding: 10px;">
                 <a href="{% url 'car-list' car.type.id%}" class="button is-danger">Back</a>
             </div>
@@ -32,30 +61,52 @@
             <section class="section">
                 <h1 class="title" id="title">{{ car.name }}</h1>
             </section>
-            
-                    {% if car.image %}
-                        <img src="{{ car.image.url }}" style="width: 100%; height: auto; max-height: 400px; max-width: 1000px;">
+
+            {% if car.image %}
+            <img src="{{ car.image.url }}" style="width: 100%; height: auto; max-height: 400px; max-width: 1000px;">
+            {% endif %}
+            <div class="content">
+                <div>คำอธิบาย: {{ car.description }}</div>
+                <div>ทะเบียนรถ: {{ car.number }}</div>
+                <div>ที่นั่ง: {{ car.seat }}</div>
+                <div>ประเภท: {{ car.type }}</div>
+                <div>ประกัน: {{ car.insurance }}</div>
+                <div>ความพร้อมใช้งาน:
+                    {% if car.vehicle_status %}พร้อมใช้งาน
+                    {% else %}ส่งซ่อม
                     {% endif %}
-                <div class="content">
-                    <div>คำอธิบาย: {{ car.description }}</div>
-                    <div>ทะเบียนรถ: {{ car.number }}</div>
-                    <div>ที่นั่ง: {{ car.seat }}</div>
-                    <div>ประเภท: {{ car.type }}</div>
-                    <div>ประกัน: {{ car.insurance }}</div>
-                    <div>ความพร้อมใช้งาน: 
-                        {% if car.vehicle_status %}พร้อมใช้งาน
-                        {% else %}ส่งซ่อม
-                        {% endif %}
-                    </div>
-                    <div>พนักงานดูแล: {{ car.employee }}</div>
-                    <div>เบอร์ติดต่อ: {{ car.employee.phone_number }}</div>
-                    <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
-                    <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
-                    <br>
-                    <a href="" class="button is-success">Rent</a>
-                    <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
                 </div>
+                <div>พนักงานดูแล: {{ car.employee }}</div>
+                <div>เบอร์ติดต่อ: {{ car.employee.phone_number }}</div>
+                <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
+                <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
+
+                <br>
+
+                <div class="tab">
+                    <button class="button is-warning" id="tablinks" onclick="openCity(event, 'perhour')">Rent Per
+                        Hour</button>
+                    <button class="button is-warning" id="tablinks" onclick="openCity(event, 'perday')">Rent Per
+                        Day</button>
+                </div>
+
+                <div id="perhour" class="tabcontent">
+                    <h3>Rent Per Hour</h3>
+                    <p>form</p>
+                    <a href="" class="button is-success">Rent</a>
+                </div>
+
+                <div id="perday" class="tabcontent">
+                    <h3>Rent Per Day</h3>
+                    <p>form</p>
+                    <a href="" class="button is-success">Rent</a>
+                </div>
+
+                <br>
+                <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
+            </div>
         </div>
+
     </div>
 </body>
 
