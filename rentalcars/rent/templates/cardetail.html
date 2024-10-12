@@ -92,15 +92,30 @@
 
                 <div id="perhour" class="tabcontent">
                     <h3>Rent Per Hour</h3>
-                    <form action="">
-                        <h1>blah</h1>
+                    <form method="POST" action="">
+                        <label>Date</label>
+                        <div>
+                            <input class="input" type="date" id="date" name="search_date" style="width: 150px;">
+                        </div>
+                        <label>Start time</label>
+                        <div>
+                            <input class="input" type="time" id="start_time" name="search_time" style="width: 95px;">
+                        </div>
+                        <label>End time</label>
+                        <div>
+                            <input class="input" type="time" id="end_time" name="search_time" style="width: 95px;">
+                        </div>
+                        <br>
+                        <a href="" class="button is-success">Rent</a>
                     </form>
-                    <a href="" class="button is-success">Rent</a>
+                    
+
                 </div>
 
                 <div id="perday" class="tabcontent">
                     <h3>Rent Per Day</h3>
                     {{ form }}
+                    <br>
                     <a href="" class="button is-success">Rent</a>
                 </div>
 

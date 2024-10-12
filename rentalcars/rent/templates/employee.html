@@ -79,7 +79,47 @@
             <div class="container pl-5">
                 <form method="POST">
                     {% csrf_token %}
-                    {{form}}
+                    {{ form.non_field_errors }}
+                    <div class="field">
+                        {{ form.first_name.errors }}
+                        <label class="label" for="{{ form.first_name.id_for_label }}">First name</label>
+                        <div class="control">
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form.last_name.errors }}
+                        <label class="label" for="{{ form.last_name.id_for_label }}">Last name</label>
+                        <div class="control">
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form.phone_number.errors }}
+                        <label class="label" for="{{ form.phone_number.id_for_label }}">Phone number</label>
+                        <div class="control">
+                            {{ form.phone_number }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form.email.errors }}
+                        <label class="label" for="{{ form.email.id_for_label }}">Email</label>
+                        <div class="control">
+                            {{ form.email }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form.position.errors }}
+                        <label class="label" for="{{ form.position.id_for_label }}">Position</label>
+                        <div class="control">
+                            {{ form.position }}
+                        </div>
+                    </div>
+
                     <br>
                     <input class="button" type="submit" value="Add">
                 </form>

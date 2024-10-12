@@ -1,9 +1,9 @@
 from django import forms
 from .models import *
-from django.forms.widgets import Textarea, TextInput
+from django.forms.widgets import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+
 
 class VehicleTypeForm(forms.ModelForm):
     class Meta:
@@ -48,9 +48,24 @@ class ChangePasswordForm(forms.Form):
     confirm_password = forms.CharField(widget=forms.PasswordInput())
     
 
-class RentForm(forms.ModelForm):
-    class meta:
+class RentFormDay(forms.ModelForm):
+    class Meta:
         model = Rent
         fields = ['start_time', 'end_time']
+        widgets = {
+            "start_time": SelectDateWidget(),
+            "end_time": SelectDateWidget()
+        }
+
+class RentFormHour(forms.ModelForm):
+    class Meta:
+        model = Rent
+        fields = ['start_time', 'end_time']
+        widgets = {
+            "start_time": SelectDateWidget(),
+            "end_time": SelectDateWidget()
+        }
+
+
 
 

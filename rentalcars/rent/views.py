@@ -175,7 +175,8 @@ class CarView(View):
 class CarDetailView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
-        context = {"car": car}
+        form = RentFormDay()
+        context = {"car": car, "form": form}
         return render(request, "cardetail.html", context)
     
 class CarEditView(View):
@@ -183,7 +184,7 @@ class CarEditView(View):
         car = Vehicle.objects.get(pk=pk)
         form = VehicleForm(instance=car)
         return render(request, "formcar.html", {
-            "form": form,
+            "formday": form,
             "pk":pk
         })
     
