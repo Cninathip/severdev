@@ -50,7 +50,7 @@ class ChangePasswordForm(forms.Form):
 
 class RentForm(forms.ModelForm):
     class meta:
-        models = Rent
-        fields = ["start_time", "end_time"]
+        model = Rent
+        fields = ['start_time', 'end_time']
 
 

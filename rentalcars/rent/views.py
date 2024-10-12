@@ -175,8 +175,7 @@ class CarView(View):
 class CarDetailView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
-        form = RentForm()
-        context = {"car": car, "form": form}
+        context = {"car": car}
         return render(request, "cardetail.html", context)
     
 class CarEditView(View):
@@ -224,14 +223,14 @@ class CarAdd(View):
 
 class EmployeeView(View):
     def get(self, request):
-        search = request.GET
+        query = request.GET
         emp = Employee.objects.all().order_by("id")
-        form = EmployeeForm(request.POST)
+        form = EmployeeForm()
 
-        if search.get("search"):
-            emp = Employee.filter(
-                # first_name__icontains=search.get("search"),
-                id__icontains=search.get("search")
+        if query.get("search"):
+            emp = emp.filter(
+                Q(id__icontains=query.get("search"))|
+                Q(first_name__icontains=query.get("search"))
             )
 
         return render(request, "employee.html", {
@@ -240,12 +239,12 @@ class EmployeeView(View):
         })
     
     def post(self, request):
+        form = EmployeeForm(request.POST)   
         emp = Employee.objects.all().order_by("id")
-        form = EmployeeForm(request.POST)        
 
         if form.is_valid():
             form.save()
-            return redirect('typecar-list')
+            return redirect('employee')
 
         return render(request, "employee.html", {
             "emp": emp,
