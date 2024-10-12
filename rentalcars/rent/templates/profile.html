@@ -1,11 +1,9 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <style>
         table {
             width: 100%;
@@ -15,15 +13,17 @@
     </style>
     <title>Profile</title>
 </head>
+
 <body>
     <div class="columns">
-        <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
-            
+        <aside class="column is-narrow"
+            style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+
             <div style="padding: 10px;">
                 <a class="button is-danger" href="{% url 'typecar-list' %}">Back</a>
             </div>
             <div class="menu has-text-centered">
-                
+
                 <br>
                 <section>
                     <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
@@ -39,24 +39,24 @@
                 <br>
                 <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
                 {% if messages %}
-                        <ul>
-                            {% for message in messages %}
-                            <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
             </div>
         </aside>
 
-        <div class="column"  style="padding-left: 300px;">
+        <div class="column" style="padding-left: 300px;">
             <section class="section">
                 <h1 class="title" id="title">Renting list</h1>
 
             </section>
             <br>
             <div class="container has-text-centered">
-                <form action="{% url 'employee' %}">
-                    <input class="input" type="text" name="search_id" placeholder="Search car"
+                <form action="{% url 'profile' %}">
+                    <input class="input" type="text" name="search" placeholder="Search car name/number"
                         style="width: 300px;">
                     <input class="button" type="submit" value="Search">
                 </form>
@@ -88,8 +88,12 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <a class="button is-danger" href="">cancle</a>
-                                <a class="button is-success" href="">approve</a>
+                                {% if i.return_status %}
+                                {% else %}
+                                <a class="button is-danger" href="{% url 'cancle' i.id %}">cancle</a>
+                                <a class="button is-success" href="{% url 'approve' i.id %}">approve</a>
+                                {% endif %}
+
                             </td>
                         </tr>
                         {% endfor %}
@@ -99,4 +103,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -253,6 +253,29 @@ class EmployeeView(View):
     
 class ProfileView(View):
     def get(self, request):
+        query = request.GET
         rent = Rent.objects.all()
-        context = {"rent": rent}
-        return render(request, "profile.html", context)
+        
+        if query.get("search"):
+            rent = rent.filter(
+                Q(vehicle__name__icontains=query.get("search"))|
+                Q(vehicle__number__icontains=query.get("search"))
+            )
+
+        return render(request, "profile.html", {"rent": rent})
+    
+class RentApprove(View):
+    def get(self, request, pk):
+        rent = Rent.objects.get(pk=pk)
+        rent.return_status = True
+        rent.save()
+
+        return redirect("profile")
+    
+class RentCancle(View):
+
+    def get(self, request, pk):
+        rent = Rent.objects.get(pk=pk)
+        rent.delete()
+
+        return redirect("profile")
