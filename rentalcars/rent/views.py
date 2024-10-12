@@ -179,6 +179,12 @@ class CarDetailView(View):
         context = {"car": car, "form": form}
         return render(request, "cardetail.html", context)
     
+    def post(self, request, pk):
+        form = RentFormDay(request.post)
+        if form.is_valid():
+            return
+        return redirect("profile")
+    
 class CarEditView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)

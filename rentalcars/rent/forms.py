@@ -3,6 +3,7 @@ from .models import *
 from django.forms.widgets import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 class VehicleTypeForm(forms.ModelForm):
@@ -49,6 +50,7 @@ class ChangePasswordForm(forms.Form):
     
 
 class RentFormDay(forms.ModelForm):
+    
     class Meta:
         model = Rent
         fields = ['start_time', 'end_time']
@@ -56,6 +58,19 @@ class RentFormDay(forms.ModelForm):
             "start_time": SelectDateWidget(),
             "end_time": SelectDateWidget()
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get("start_time")
+        end_date = cleaned_data.get("end_time")
+        now = datetime.now()
+
+        if end_date < start_date:
+            self.add_error(
+                "start_date",
+                "Due date cannot be before start date"
+            )
+        return cleaned_data
 
 class RentFormHour(forms.ModelForm):
     class Meta:
