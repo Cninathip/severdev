@@ -38,6 +38,13 @@
                 </div>
                 <br>
                 <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
+                {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                {% endif %}
             </div>
         </aside>
 

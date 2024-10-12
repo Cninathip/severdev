@@ -11,8 +11,8 @@ from django.utils import timezone
 from django.utils.timezone import make_aware, get_current_timezone
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.views import PasswordChangeView
-from django.urls import reverse_lazy
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 class Login(View):
     def get(self, request):
@@ -56,22 +56,30 @@ class Register(View):
             return redirect('typecar-list')
         return render(request, 'register.html', {"form": form})
     
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(View):
     def get(self, request):
-        form = ChangePasswordForm
+        form = ChangePasswordForm()
         return render(request, "changepassword.html", {"form": form})
     
     def post(self, request):
-        form = ChangePasswordForm(data=request.POST)
-        # if form.is_valid():
-        if User.check_password(form.cleaned_data["old_password"]):
-            print("yes")
-            return redirect('profile')
-        else:
-            print("no")
-            return redirect('profile')
-
+        form = ChangePasswordForm(request.POST)
+        old_password: str = request.POST.get("old_password")
+        new_password: str = request.POST.get('new_password')
+        confirm_password: str = request.POST.get('confirm_password')
+        if not request.user.check_password(old_password):
+            messages.warning(request, "old password doesn't match.")
+            return redirect("change_password")
+        if old_password == new_password:
+            messages.warning(request, "your new password cannot be the same as your old password.")
+            return redirect("change_password")
+        if new_password != confirm_password:
+            messages.warning(request, "new password doesn't match.")
+            return redirect("change_password")
         
+        request.user.set_password(new_password)
+        request.user.save()
+        messages.success(request, "password change successfull. your new password would take effect on next login.")
+        return redirect("profile")
 
 class TypeCarView(LoginRequiredMixin, View):
     login_url = "/login/"
@@ -167,7 +175,8 @@ class CarView(View):
 class CarDetailView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
-        context = {"car": car}
+        form = RentForm()
+        context = {"car": car, "form": form}
         return render(request, "cardetail.html", context)
     
 class CarEditView(View):

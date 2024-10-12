@@ -3,6 +3,7 @@ from .models import *
 from django.forms.widgets import Textarea, TextInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class VehicleTypeForm(forms.ModelForm):
     class Meta:
@@ -45,9 +46,11 @@ class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput())
     new_password = forms.CharField(widget=forms.PasswordInput())
     confirm_password = forms.CharField(widget=forms.PasswordInput())
-
-
     
 
+class RentForm(forms.ModelForm):
+    class meta:
+        models = Rent
+        fields = ["start_time", "end_time"]
 
 
