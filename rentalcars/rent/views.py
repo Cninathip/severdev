@@ -175,14 +175,27 @@ class CarView(View):
 class CarDetailView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
-        form = RentFormDay()
+        form = RentForm()
         context = {"car": car, "form": form}
         return render(request, "cardetail.html", context)
     
     def post(self, request, pk):
-        form = RentFormDay(request.post)
+        form = RentForm(request.post)
         if form.is_valid():
-            return
+            rent = Rent(
+                customer = Customer.objects.get(
+                    first_name = request.user.first_name
+                    , last_name = request.user.last_name
+                    , email = request.user.email
+                ),
+                vehicle = Vehicle.objects.get(pk=pk),
+                payment = 0,
+                start_time = form.cleaned_data["start_time"],
+                end_time = form.cleaned_data["end_time"],
+                return_status = False
+            )
+            rent.save()
+            return redirect("profile")
         return redirect("profile")
     
 class CarEditView(View):
@@ -190,7 +203,7 @@ class CarEditView(View):
         car = Vehicle.objects.get(pk=pk)
         form = VehicleForm(instance=car)
         return render(request, "formcar.html", {
-            "formday": form,
+            "form": form,
             "pk":pk
         })
     

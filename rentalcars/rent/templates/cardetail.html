@@ -5,34 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <title>Detail</title>
-
-    <style>
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-        }
-    </style>
-    <script>
-        function openCity(evt, attr) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementById("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(attr).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>
 </head>
 
 <body>
@@ -83,42 +55,14 @@
 
                 <br>
 
-                <div class="tab">
-                    <button class="button is-warning" id="tablinks" onclick="openCity(event, 'perhour')">Rent Per
-                        Hour</button>
-                    <button class="button is-warning" id="tablinks" onclick="openCity(event, 'perday')">Rent Per
-                        Day</button>
-                </div>
-
-                <div id="perhour" class="tabcontent">
-                    <h3>Rent Per Hour</h3>
-                    <form method="POST" action="">
-                        <label>Date</label>
-                        <div>
-                            <input class="input" type="date" id="date" name="search_date" style="width: 150px;">
-                        </div>
-                        <label>Start time</label>
-                        <div>
-                            <input class="input" type="time" id="start_time" name="search_time" style="width: 95px;">
-                        </div>
-                        <label>End time</label>
-                        <div>
-                            <input class="input" type="time" id="end_time" name="search_time" style="width: 95px;">
-                        </div>
-                        <br>
-                        <a href="" class="button is-success">Rent</a>
-                    </form>
-                    
-
-                </div>
-
-                <div id="perday" class="tabcontent">
-                    <h3>Rent Per Day</h3>
+                <h3>Rent</h3>
+                
+                <form method="POST" style="width: 150px;">
+                    {% csrf_token %}
                     {{ form }}
                     <br>
-                    <a href="" class="button is-success">Rent</a>
-                </div>
-
+                    <input type="submit" class="button is-success" value="Rent">
+                </form>
                 <br>
                 <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
             </div>

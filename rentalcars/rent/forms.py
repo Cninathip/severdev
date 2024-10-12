@@ -4,6 +4,7 @@ from django.forms.widgets import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.forms import SplitDateTimeField
 
 
 class VehicleTypeForm(forms.ModelForm):
@@ -49,37 +50,40 @@ class ChangePasswordForm(forms.Form):
     confirm_password = forms.CharField(widget=forms.PasswordInput())
     
 
-class RentFormDay(forms.ModelForm):
+class RentForm(forms.ModelForm):
+    start_time = SplitDateTimeField(widget=SplitDateTimeWidget(
+                date_attrs={"class": "input", "type": "date"},
+                time_attrs={"class": "input", "type": "time"}
+            ))
+    end_time = SplitDateTimeField(widget=SplitDateTimeWidget(
+                date_attrs={"class": "input", "type": "date"},
+                time_attrs={"class": "input", "type": "time"}
+            ))
     
     class Meta:
         model = Rent
         fields = ['start_time', 'end_time']
-        widgets = {
-            "start_time": SelectDateWidget(),
-            "end_time": SelectDateWidget()
-        }
-    
+
+        
     def clean(self):
         cleaned_data = super().clean()
-        start_date = cleaned_data.get("start_time")
-        end_date = cleaned_data.get("end_time")
+        start_time = cleaned_data.get("start_time")
+        end_time = cleaned_data.get("end_time")
         now = datetime.now()
 
-        if end_date < start_date:
+        if end_time < start_time:
             self.add_error(
-                "start_date",
+                "start_time",
                 "Due date cannot be before start date"
+            )
+        if start_time > now:
+            self.add_error(
+                "start_time",
+                "Now cannot be before start date"
             )
         return cleaned_data
 
-class RentFormHour(forms.ModelForm):
-    class Meta:
-        model = Rent
-        fields = ['start_time', 'end_time']
-        widgets = {
-            "start_time": SelectDateWidget(),
-            "end_time": SelectDateWidget()
-        }
+    
 
 
 
