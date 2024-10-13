@@ -180,8 +180,14 @@ class CarDetailView(View):
         return render(request, "cardetail.html", context)
     
     def post(self, request, pk):
-        form = RentForm(request.post)
+        form = RentForm(request.POST)
+        car = Vehicle.objects.get(pk=pk)
         if form.is_valid():
+            pay = Payment(
+                total_cost = 1,
+                pay_status = False
+            )
+            pay.save()
             rent = Rent(
                 customer = Customer.objects.get(
                     first_name = request.user.first_name
@@ -189,14 +195,14 @@ class CarDetailView(View):
                     , email = request.user.email
                 ),
                 vehicle = Vehicle.objects.get(pk=pk),
-                payment = 0,
+                payment = pay,
                 start_time = form.cleaned_data["start_time"],
                 end_time = form.cleaned_data["end_time"],
                 return_status = False
             )
             rent.save()
             return redirect("profile")
-        return redirect("profile")
+        return render(request, "cardetail.html", {"car": car, "form": form})
     
 class CarEditView(View):
     def get(self, request, pk):
