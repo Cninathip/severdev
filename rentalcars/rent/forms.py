@@ -4,7 +4,7 @@ from django.forms.widgets import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from datetime import datetime
-from django.utils import timezone
+from django.utils.timezone import make_aware, get_current_timezone
 from django.forms import SplitDateTimeField
 
 
@@ -68,7 +68,7 @@ class RentForm(forms.ModelForm):
         
     def clean(self):
         cleaned_data = super().clean()
-        tznow = timezone.now()
+        tz = get_current_timezone()
         start_time = cleaned_data.get("start_time")
         end_time = cleaned_data.get("end_time")
         now = datetime.now()
@@ -76,13 +76,18 @@ class RentForm(forms.ModelForm):
         if end_time < start_time:
             self.add_error(
                 "start_time",
-                "start date shold before end date."
+                "start date should before end date."
             )
-        # if start_time.utcnow().replace(tzinfo=tznow) > now:
-        #     self.add_error(
-        #         "start_time",
-        #         "Now cannot be before start date"
-        #     )
+        if start_time < make_aware(now, tz):
+            self.add_error(
+                "start_time",
+                "start date should after now."
+            )
+        if end_time < make_aware(now, tz):
+            self.add_error(
+                "start_time",
+                "End date should after now."
+            )
         return cleaned_data
 
     
