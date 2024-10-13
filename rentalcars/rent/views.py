@@ -183,8 +183,11 @@ class CarDetailView(View):
         form = RentForm(request.POST)
         car = Vehicle.objects.get(pk=pk)
         if form.is_valid():
+            start_time = form.cleaned_data["start_time"]
+            end_time = form.cleaned_data["end_time"]
+            duration = end_time - start_time
             pay = Payment(
-                total_cost = 1,
+                total_cost = (duration.days*car.price_per_day)+((duration.seconds//3600)*car.price_per_hour),
                 pay_status = False
             )
             pay.save()
@@ -201,6 +204,9 @@ class CarDetailView(View):
                 return_status = False
             )
             rent.save()
+            
+            print(duration.days)
+            print(duration.seconds // 3600)
             return redirect("profile")
         return render(request, "cardetail.html", {"car": car, "form": form})
     
