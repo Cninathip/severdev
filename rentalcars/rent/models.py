@@ -15,6 +15,7 @@ class Payment(models.Model):
     total_cost = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     pay_at = models.DateTimeField(null=True)
+    slip = models.ImageField(upload_to='slips/', blank=True, null=True)
     pay_status = models.BooleanField()
 
     def __str__(self):

@@ -210,6 +210,11 @@ class CarDetailView(View):
             return redirect("profile")
         return render(request, "cardetail.html", {"car": car, "form": form})
     
+class PaidView(View):
+    def get(self, request, pk):
+        
+        return
+    
 class CarEditView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
