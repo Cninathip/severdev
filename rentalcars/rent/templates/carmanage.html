@@ -42,14 +42,14 @@
             <div class="container has-text-centered">
                 <form action="{% url 'car-manage' %}">
                     {% if perms.rent.add_vehicle %}
-                    <a href="{% url 'car-add'%}" class="button is-primary">Add car</a>
+                    <a href="{% url 'car-add'%}" class="button is-primary">เพิ่มรถยนต์</a>
                     {% endif %}
                     {% if perms.rent.add_vehicletype %}
-                    <a href="{% url 'typecar-add' %}" class="button is-link">Add car type</a>
+                    <a href="{% url 'typecar-add' %}" class="button is-link">เพิ่มประเภทรถ</a>
                     {% endif %}
                     <input class="input" type="text" name="search" placeholder="ค้นหาจากทะเบียนรถ/ประเภทรถ"
                         style="width: 300px;">
-                    <input class="button" type="submit" value="Search">
+                    <input class="button" type="submit" value="ค้นหา">
                 </form>
                 <table class="table" id="datatable">
                     <thead>

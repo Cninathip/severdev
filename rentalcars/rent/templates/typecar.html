@@ -33,11 +33,11 @@
             </section>
             <div class="container has-text-centered">
                 {% if perms.rent.change_vehicletype %}
-                <a href="{% url 'car-manage' %}" class="button is-info">Manage Vehicle</a>
+                <a href="{% url 'car-manage' %}" class="button is-info">จัดการรถยนต์</a>
                 {% endif %}
 
                 {% if perms.rent.change_employee %}
-                <a href="{% url 'employee' %}" class="button is-warning">Manage Employee</a>
+                <a href="{% url 'employee' %}" class="button is-warning">จัดการพนักงาน</a>
                 {% endif %}
             </div>
             <div class="container"  style="margin-top: 20px;">
@@ -49,7 +49,7 @@
                                     <div class="card-image">
                                         <figure class="image is-4by3">
                                             {% if type.image %}
-                                            <img src="{{ type.image.url }}" style="width: 100%; height: auto;">"
+                                            <img src="{{ type.image.url }}" style="max-height: 250px; max-width: 400px;">"
                                             {% endif %}
                                         </figure>
                                         <div class="media-content has-text-centered">
@@ -60,10 +60,10 @@
                                         </div>
                                         <div class="has-text-right">
                                             {% if perms.rent.change_vehicletype %}
-                                            <a class="button is-warning" href="{% url 'typecar-update' type.id %}">Edit</a>
+                                            <a class="button is-warning" href="{% url 'typecar-update' type.id %}">แก้ไข</a>
                                             {% endif %}
                                             {% if perms.rent.delete_vehicletype %}
-                                            <a class="button is-danger" href="{% url 'typecar-delete' type.id %}">Delete</a>
+                                            <a class="button is-danger" href="{% url 'typecar-delete' type.id %}">ลบ</a>
                                             {% endif %}
                                         </div>
                                     </div>

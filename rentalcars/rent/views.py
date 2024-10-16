@@ -5,14 +5,13 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rent.models import *
 from .forms import *
-from django.http import HttpResponse
 from django.db.models import Q
-from django.utils import timezone
 from django.utils.timezone import make_aware, get_current_timezone
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import Group
 
 class Login(View):
     def get(self, request):
@@ -51,6 +50,8 @@ class Register(View):
                 email = form.cleaned_data["email"],
                 phone_number = request.POST.get("phone_number")
             )
+            user_group = Group.objects.get(name='User') 
+            user_group.user_set.add(user)
 
             login(request, user)
             return redirect('typecar-list')
@@ -382,7 +383,11 @@ class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
         query = request.GET
         if request.user.has_perm('rent.add_rent'):
-            rent = Rent.objects.filter(customer=request.user)
+            rent = Rent.objects.filter(customer = Customer.objects.get(
+                    first_name = request.user.first_name
+                    , last_name = request.user.last_name
+                    , email = request.user.email
+                ))
             if query.get("search"):
                 rent = rent.filter(
                     Q(vehicle__name__icontains=query.get("search"))|

@@ -39,7 +39,7 @@
                     <div class="column">
                         <div class="field">
                             {{ form.name.errors }}
-                            <label class="label" for="{{ form.name.id_for_label }}">Vehicle Name</label>
+                            <label class="label" for="{{ form.name.id_for_label }}">ชื่อยี่ห้อ/รุ่นรถ</label>
                             <div class="control">
                                 {{ form.name }}
                             </div>
@@ -47,7 +47,7 @@
 
                         <div class="field">
                             {{ form.number.errors }}
-                            <label class="label" for="{{ form.name.id_for_label }}">Vehicle Number</label>
+                            <label class="label" for="{{ form.name.id_for_label }}">ทะเบียนรถ</label>
                             <div class="control">
                                 {{ form.number }}
                             </div>
@@ -55,7 +55,7 @@
 
                         <div class="field">
                             {{ form.description.errors }}
-                            <label class="label" for="{{ form.description.id_for_label }}">Description</label>
+                            <label class="label" for="{{ form.description.id_for_label }}">คำอธิบาย</label>
                             <div class="control">
                                 {{ form.description }}
                             </div>
@@ -63,7 +63,7 @@
     
                         <div class="field">
                             {{ form.type.errors }}
-                            <label class="label" for="{{ form.type.id_for_label }}">Vehicle Type</label>
+                            <label class="label" for="{{ form.type.id_for_label }}">ประเภทรถ</label>
                             <div class="control">
                                 {{ form.type }}
                             </div>
@@ -71,7 +71,7 @@
             
                         <div class="field">
                             {{ form.vehicle_status.errors }}
-                            <label class="label" for="{{ form.vehicle_status.id_for_label }}">Status</label>
+                            <label class="label" for="{{ form.vehicle_status.id_for_label }}">สถานะพร้อมใช้งาน</label>
                             <div class="control">
                                 {{ form.vehicle_status }}
                             </div>
@@ -79,7 +79,7 @@
                 
                         <div class="field">
                             {{ form.image.errors }}
-                            <label class="label" for="{{ form.image.id_for_label }}">Upload Image</label>
+                            <label class="label" for="{{ form.image.id_for_label }}">ภาพประกอบ</label>
                             <div class="control">
                                 {{ form.image }}
                             </div>
@@ -90,7 +90,7 @@
                     <div class="column">
                         <div class="field">
                             {{ form.employee.errors }}
-                            <label class="label" for="{{ form.employee.id_for_label }}">Employee</label>
+                            <label class="label" for="{{ form.employee.id_for_label }}">พนักงานที่ดูแล</label>
                             <div class="control">
                                 {{ form.employee }}
                             </div>
@@ -98,7 +98,7 @@
             
                         <div class="field">
                             {{ form.insurance.errors }}
-                            <label class="label" for="{{ form.insurance.id_for_label }}">Insurance</label>
+                            <label class="label" for="{{ form.insurance.id_for_label }}">ประกัน</label>
                             <div class="control">
                                 {{ form.insurance }}
                             </div>
@@ -106,7 +106,7 @@
             
                         <div class="field">
                             {{ form.price_per_hour.errors }}
-                            <label class="label" for="{{ form.price_per_hour.id_for_label }}">Price per Hour</label>
+                            <label class="label" for="{{ form.price_per_hour.id_for_label }}">ราคาต่อชั่วโมง</label>
                             <div class="control">
                                 {{ form.price_per_hour }}
                             </div>
@@ -114,7 +114,7 @@
             
                         <div class="field">
                             {{ form.price_per_day.errors }}
-                            <label class="label" for="{{ form.price_per_day.id_for_label }}">Price per Day</label>
+                            <label class="label" for="{{ form.price_per_day.id_for_label }}">ราคาต่อวัน</label>
                             <div class="control">
                                 {{ form.price_per_day }}
                             </div>
@@ -122,7 +122,7 @@
             
                         <div class="field">
                             {{ form.seat.errors }}
-                            <label class="label" for="{{ form.seat.id_for_label }}">Seat</label>
+                            <label class="label" for="{{ form.seat.id_for_label }}">จำนวนที่นั่ง</label>
                             <div class="control">
                                 {{ form.seat }}
                             </div>
@@ -131,10 +131,10 @@
                         <br><br>
                         <div class="field is-grouped">
                             <div class="control">
-                                <input type="submit" class="button is-success" value="Save">
+                                <input type="submit" class="button is-success" value="บันทึก">
                             </div>
                             <div class="control">
-                                <a class="button is-danger" href="{% url 'car-manage' %}">Back</a>
+                                <a class="button is-danger" href="{% url 'car-manage' %}">ย้อนกลับ</a>
                             </div>
                         </div>
                     </div> 

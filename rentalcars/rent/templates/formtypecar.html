@@ -37,7 +37,7 @@
                     
                     <div class="field">
                         {{ form.name.errors }}
-                        <label class="label" for="{{ form.name.id_for_label }}">Vehicle Name</label>
+                        <label class="label" for="{{ form.name.id_for_label }}">ชื่อประเภทรถ</label>
                         <div class="control">
                             {{ form.name }}
                         </div>
@@ -45,7 +45,7 @@
             
                     <div class="field">
                         {{ form.description.errors }}
-                        <label class="label" for="{{ form.description.id_for_label }}">Description</label>
+                        <label class="label" for="{{ form.description.id_for_label }}">คำอธิบายสั้น ๆ</label>
                         <div class="control">
                             {{ form.description }}
                         </div>
@@ -53,7 +53,7 @@
             
                     <div class="field">
                         {{ form.image.errors }}
-                        <label class="label" for="{{ form.image.id_for_label }}">Upload Image</label>
+                        <label class="label" for="{{ form.image.id_for_label }}">ภาพประกอบ</label>
                         <div class="control">
                             {{ form.image }}
                         </div>
@@ -61,10 +61,10 @@
             
                     <div class="field is-grouped">
                         <div class="control">
-                            <input type="submit" class="button is-success" value="Save">
+                            <input type="submit" class="button is-success" value="บันทึก">
                         </div>
                         <div class="control">
-                            <a class="button is-danger" href="{% url 'typecar-list' %}">Back</a>
+                            <a class="button is-danger" href="{% url 'typecar-list' %}">ย้อนกลับ</a>
                         </div>
                     </div>
                 </form>
