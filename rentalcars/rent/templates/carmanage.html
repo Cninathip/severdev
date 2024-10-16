@@ -34,16 +34,16 @@
             </div>
         </aside>
 
-        <div class="column"  style="padding-left: 300px;">
+        <div class="column" style="padding-left: 200px;">
             <section class="section">
                 <h1 class="title" id="title">Vehicle</h1>
             </section>
             <br>
             <div class="container has-text-centered">
-                <form action="{% url 'employee' %}">
+                <form action="{% url 'car-manage' %}">
                     <a href="{% url 'car-add'%}" class="button is-primary">Add car</a>
                     <a href="{% url 'typecar-add' %}" class="button is-link">Add car type</a>
-                    <input class="input" type="text" name="search" placeholder="Search employee id / employee name"
+                    <input class="input" type="text" name="search" placeholder="ค้นหาจากทะเบียนรถ/ประเภทรถ"
                         style="width: 300px;">
                     <input class="button" type="submit" value="Search">
                 </form>

@@ -144,9 +144,7 @@ class CarManageView(View):
         vehicle = Vehicle.objects.all().order_by("id")
 
         if query.get("search"):
-            emp = emp.filter(
-                Q(id__icontains=query.get("search"))|
-                Q(name__icontains=query.get("search"))|
+            vehicle = vehicle.filter(
                 Q(number__icontains=query.get("search"))|
                 Q(type__icontains=query.get("search"))
             )
