@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>QR</title>
+    <style>
+        .center {
+            width: 200px;
+            height: 200px;
+            background-color: antiquewhite;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="columns">
+        <aside class="column is-narrow"
+            style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+
+            <div style="padding: 10px;">
+                <a class="button is-danger" href="{% url 'profile' %}">Back</a>
+            </div>
+            <div class="menu has-text-centered">
+
+                <br>
+                <section>
+                    <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p style="color: white;"><b>{{user.username}}</b></p>
+                    <br>
+                    <p style="color: white;">{{user.email}}</p>
+                </div>
+                <br>
+                <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+        <section class="section has-text-centered">
+            <h1 class="title" id="title">Payment</h1>
+        </section>    
+        <div style="padding-top: 100px; width: 80%; margin: auto;">
+            <div class="card">
+                <br>
+                <div class="media-content has-text-centered">
+                </div>
+                <div class="container pl-5 pr-5 pb-5 pt-3 has-text-centered">
+                    <section class="section has-text-centered">
+                        <h1 class="title" id="title">Payment</h1>
+                            <h2>User: {{rent.customer}}</h2>
+                            <h2>Vehicle: {{rent.vehicle}} {{rent.vehicle.number}}</h2>
+                            <h2>Total price: {{rent.payment.total_cost}}</h2>
+                            <h2>Create at: {{rent.payment.create_at}}</h2>
+                            <h2>Time: {{rent.start_time}} - {{rent.end_time}} ({{duration}})</h2>
+                        
+                        <br>
+                        <div class="center">
+                            <p>QR</p>
+                        </div>
+                        <br>
+                        <h2 style="color: red;">**โปรดทราบ** ยกเลิกการเช่าหลังชำระไม่มีการคืนเงินทุกกรณี</h2>
+                        <h2 style="color: red;">**โปรดทราบ** เมื่อโอนเงินแล้วควรให้พนักงานเช็คสลิปโอนเงิน</h2>
+                        <br>
+                        <a class="button is-danger" href="{% url 'profile'%}">Back to profile</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

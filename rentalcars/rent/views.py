@@ -210,11 +210,6 @@ class CarDetailView(View):
             return redirect("qr", pk=rent.pk)
         return render(request, "cardetail.html", {"car": car, "form": form})
     
-class PaidView(View):
-    def get(self, request, pk):
-        
-        return
-    
 class CarEditView(View):
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
@@ -320,4 +315,7 @@ class RentCancle(View):
 class QRView(View):
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
-        return render(request, "qr.html", {"rent": rent})
+        start_time = rent.start_time
+        end_time = rent.end_time
+        duration = end_time - start_time
+        return render(request, "qr.html", {"rent": rent, "duration": duration})
