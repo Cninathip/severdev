@@ -85,7 +85,7 @@ class RentForm(forms.ModelForm):
             )
         if end_time < make_aware(now, tz):
             self.add_error(
-                "start_time",
+                "end_time",
                 "End date should after now."
             )
         return cleaned_data

@@ -56,7 +56,7 @@
                             <h2>Vehicle: {{rent.vehicle}} {{rent.vehicle.number}}</h2>
                             <h2>Total price: {{rent.payment.total_cost}}</h2>
                             <h2>Create at: {{rent.payment.create_at}}</h2>
-                            <h2>Time: {{rent.start_time}} - {{rent.end_time}} ({{duration}})</h2>
+                            <h2>Time: {{rent.start_time}} - {{rent.end_time}} ({{duration.days}} days {{duration.seconds//3600}})</h2>
                         
                         <br>
                         <div class="center">
