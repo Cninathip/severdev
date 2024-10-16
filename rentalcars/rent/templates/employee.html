@@ -64,7 +64,10 @@
                             <td>{{i.phone_number}}</td>
                             <td>{{i.email}}</td>
                             <td>{{i.position}}</td>
-                            <td><a class="button is-warning" href="{% url 'kick-employee' i.id%}">ไล่ออก</a></td>
+                            <td>
+                                <a class="button is-warning" href="{% url 'edit-employee' i.id%}">แก้ไข</a>
+                                <a class="button is-danger" href="{% url 'kick-employee' i.id%}">ไล่ออก</a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

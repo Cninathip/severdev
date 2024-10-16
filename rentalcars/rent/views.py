@@ -284,6 +284,36 @@ class EmployeeView(View):
             "form": form
         })
     
+class EmployeeEditView(View):
+    def get(self, request, pk):
+        query = request.GET
+        emp = Employee.objects.all().order_by("id")
+        form = EmployeeForm(instance=Employee.objects.get(pk=pk))
+
+        if query.get("search"):
+            emp = emp.filter(
+                Q(id__icontains=query.get("search"))|
+                Q(first_name__icontains=query.get("search"))
+            )
+
+        return render(request, "employee.html", {
+            "emp": emp,
+            "form": form
+        })
+    
+    def post(self, request, pk):
+        form = EmployeeForm(request.POST, request.FILES, instance=Employee.objects.get(pk=pk))   
+        emp = Employee.objects.all().order_by("id")
+
+        if form.is_valid():
+            form.save()
+            return redirect('employee')
+
+        return render(request, "employee.html", {
+            "emp": emp,
+            "form": form
+        })
+
 class KickEmployee(View):
     def get(self, request, pk):
         emp = Employee.objects.get(pk=pk)
