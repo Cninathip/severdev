@@ -381,13 +381,20 @@ class ProfileView(LoginRequiredMixin, View):
 
     def get(self, request):
         query = request.GET
-        rent = Rent.objects.all()
-        
-        if query.get("search"):
-            rent = rent.filter(
-                Q(vehicle__name__icontains=query.get("search"))|
-                Q(vehicle__number__icontains=query.get("search"))
-            )
+        if request.user.has_perm('rent.add_rent'):
+            rent = Rent.objects.filter(customer=request.user)
+            if query.get("search"):
+                rent = rent.filter(
+                    Q(vehicle__name__icontains=query.get("search"))|
+                    Q(vehicle__number__icontains=query.get("search"))
+                )
+        else:
+            rent = Rent.objects.all()
+            if query.get("search"):
+                rent = rent.filter(
+                    Q(vehicle__name__icontains=query.get("search"))|
+                    Q(vehicle__number__icontains=query.get("search"))
+                )
 
         return render(request, "profile.html", {"rent": rent})
     
