@@ -146,7 +146,7 @@ class CarManageView(View):
         if query.get("search"):
             vehicle = vehicle.filter(
                 Q(number__icontains=query.get("search"))|
-                Q(type__icontains=query.get("search"))
+                Q(type__name__icontains=query.get("search"))
             )
 
         return render(request, "carmanage.html", {
