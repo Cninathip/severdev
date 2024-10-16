@@ -44,26 +44,25 @@
                     <div class="column is-one-fifth">
                         <a href="">
                             <div class="card">
-                                <a href="{% url 'car-detail' car.id %}">
                                     <div class="card-image">
                                         <figure class="image is-4by3">
+                                            <a href="{% url 'car-detail' car.id %}">
                                             {% if car.image %}
                                             <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
                                             {% endif %}
+                                        </a>
                                         </figure>
+                                        <br>
                                         <div class="media-content has-text-centered">
                                             <p class="title is-4">{{ car.name }}</p>
                                         </div>
                                         <div class="content">
-                                            <br>
+                                            
                                             <div>ที่นั่ง: {{ car.seat }}</div>
                                             <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
                                             <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
-                                            <div class="container has-text-right"><a href=""
-                                                    class="button is-warning is-small ">รายละเอียด</a></div>
                                         </div>
                                     </div>
-                                </a>
 
                             </div>
                         </a>

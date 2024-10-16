@@ -28,46 +28,49 @@
                 <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
             </div>
         </aside>
+            <div class="columns">
+                
+                <div class="column" style="margin: 20px; margin-left: 300px;">
+                    <section class="section">
+                        <h1 class="title" id="title">{{ car.name }}</h1>
+                    </section>
 
-        <div class="column" style="margin: 20px; margin-left: 230px;">
-            <section class="section">
-                <h1 class="title" id="title">{{ car.name }}</h1>
-            </section>
-
-            {% if car.image %}
-            <img src="{{ car.image.url }}" style="width: 100%; height: auto; max-height: 400px; max-width: 1000px;">
-            {% endif %}
-            <div class="content">
-                <div>คำอธิบาย: {{ car.description }}</div>
-                <div>ทะเบียนรถ: {{ car.number }}</div>
-                <div>ที่นั่ง: {{ car.seat }}</div>
-                <div>ประเภท: {{ car.type }}</div>
-                <div>ประกัน: {{ car.insurance }}</div>
-                <div>ความพร้อมใช้งาน:
-                    {% if car.vehicle_status %}พร้อมใช้งาน
-                    {% else %}ส่งซ่อม
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" style="width: 800px; height: auto;">
                     {% endif %}
                 </div>
-                <div>พนักงานดูแล: {{ car.employee }}</div>
-                <div>เบอร์ติดต่อ: {{ car.employee.phone_number }}</div>
-                <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
-                <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
 
-                <br>
+                <div class="column" style="margin-top: 150px;">
+                    <div class="content">
+                        <div>คำอธิบาย: {{ car.description }}</div>
+                        <div>ทะเบียนรถ: {{ car.number }}</div>
+                        <div>ที่นั่ง: {{ car.seat }}</div>
+                        <div>ประเภท: {{ car.type }}</div>
+                        <div>ประกัน: {{ car.insurance }}</div>
+                        <div>ความพร้อมใช้งาน:
+                            {% if car.vehicle_status %}พร้อมใช้งาน
+                            {% else %}ส่งซ่อม
+                            {% endif %}
+                        </div>
+                        <div>พนักงานดูแล: {{ car.employee }}</div>
+                        <div>เบอร์ติดต่อ: {{ car.employee.phone_number }}</div>
+                        <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
+                        <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
+                    </div>
+                </div>
 
-                <h3>Rent</h3>
-                
-                <form method="POST" style="width: 150px;">
-                    {% csrf_token %}
-                    {{ form }}
-                    <br>
-                    <input type="submit" class="button is-success" value="Rent">
-                </form>
-                <br>
-                <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
+                <div class="column" style="margin-top: 100px;">
+                    <div class="title">Rent</div>
+                    <form method="POST" style="width: 150px;">
+                        {% csrf_token %}
+                        {{ form }}
+                        <br>
+                        <input type="submit" class="button is-success" value="Rent">
+                        <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
+                    </form>
+                </div>
+
             </div>
-        </div>
-
     </div>
 </body>
 
