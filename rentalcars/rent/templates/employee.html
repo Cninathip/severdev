@@ -49,10 +49,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Phone number</th>
+                            <th>ชื่อ-สกุล</th>
+                            <th>เบอร์โทรศัพท์</th>
                             <th>Email</th>
-                            <th>Position</th>
+                            <th>ตำแหน่ง</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@
                             <td>{{i.phone_number}}</td>
                             <td>{{i.email}}</td>
                             <td>{{i.position}}</td>
-                            <td><a class="button is-warning" href="{% url 'employee' %}">Kick</a></td>
+                            <td><a class="button is-warning" href="{% url 'kick-employee' i.id%}">ไล่ออก</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

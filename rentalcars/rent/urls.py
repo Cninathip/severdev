@@ -15,9 +15,11 @@ urlpatterns = [
     path("profile", views.ProfileView.as_view(), name="profile"),
     path("approve/<int:pk>", views.RentApprove.as_view(), name="approve"),
     path("cancle/<int:pk>", views.RentCancle.as_view(), name="cancle"),
+    path("check-paid/<int:pk>", views.RentPaid.as_view(), name="check-paid"),
     path("profile/change-password", views.ChangePasswordView.as_view(), name="change_password"),
 
     path("employee", views.EmployeeView.as_view(), name="employee"),
+    path("employee/<int:pk>", views.KickEmployee.as_view(), name="kick-employee"),
     
     path("detail/<int:pk>/paid", views.CarDetailView.as_view(), name="paid"),
     path("QR/<int:pk>", views.QRView.as_view(), name="qr"),

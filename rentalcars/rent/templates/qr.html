@@ -52,11 +52,12 @@
                 <div class="container pl-5 pr-5 pb-5 pt-3 has-text-centered">
                     <section class="section has-text-centered">
                         <h1 class="title" id="title">Payment</h1>
-                            <h2>User: {{rent.customer}}</h2>
-                            <h2>Vehicle: {{rent.vehicle}} {{rent.vehicle.number}}</h2>
-                            <h2>Total price: {{rent.payment.total_cost}}</h2>
-                            <h2>Create at: {{rent.payment.create_at}}</h2>
-                            <h2>Time: {{rent.start_time}} - {{rent.end_time}} ({{days}} days {{hours}} hours)</h2>
+                            <h2>ลูกค้า: {{rent.customer}}</h2>
+                            <h2>ยานพาหนะ: {{rent.vehicle}} {{rent.vehicle.number}}</h2>
+                            <h2>ราคารวมการเช่า: {{rent.payment.total_cost}}</h2>
+                            <h2>รายการสร้างวันที่: {{rent.payment.created_at}}</h2>
+                            <h2>ระยะเวลาการเช่า: {{rent.start_time}} - {{rent.end_time}} ({{days}} days {{hours}} hours)</h2>
+                            <h2>พนักงานมี่ดูแล: {{rent.vehicle.employee}} {{rent.vehicle.employee.phone_number}}</h2>
                         
                         <br>
                         <div class="center">

@@ -59,7 +59,7 @@ class Vehicle(models.Model):
     price_per_day = models.IntegerField()
     seat = models.IntegerField()
     description = models.CharField(max_length=255, null=True, blank=True)
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT)
+    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     vehicle_status = models.BooleanField()
 
     def __str__(self):

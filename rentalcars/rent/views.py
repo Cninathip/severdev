@@ -188,6 +188,7 @@ class CarDetailView(View):
             duration = end_time - start_time
             pay = Payment(
                 total_cost = (duration.days*car.price_per_day)+((duration.seconds//3600)*car.price_per_hour),
+                created_at = datetime.now(),
                 pay_status = False
             )
             pay.save()
@@ -283,6 +284,14 @@ class EmployeeView(View):
             "form": form
         })
     
+class KickEmployee(View):
+    def get(self, request, pk):
+        emp = Employee.objects.get(pk=pk)
+        vehicle = Vehicle.objects.get(employee=emp)
+        emp.delete()
+
+        return redirect("employee")
+
 class ProfileView(View):
     def get(self, request):
         query = request.GET
@@ -300,6 +309,14 @@ class RentApprove(View):
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
         rent.return_status = True
+        rent.save()
+
+        return redirect("profile")
+    
+class RentPaid(View):
+    def get(self, request, pk):
+        rent = Rent.objects.get(pk=pk)
+        rent.payment.pay_status = True
         rent.save()
 
         return redirect("profile")

@@ -50,25 +50,25 @@
 
         <div class="column" style="padding-left: 300px;">
             <section class="section">
-                <h1 class="title" id="title">Renting list</h1>
+                <h1 class="title" id="title">ประวัติการเช่า</h1>
 
             </section>
             <br>
             <div class="container has-text-centered">
                 <form action="{% url 'profile' %}">
-                    <input class="input" type="text" name="search" placeholder="Search car name/number"
+                    <input class="input" type="text" name="search" placeholder="ค้นหาจากชื่อรถหรือเลขทะเบียนรถ"
                         style="width: 300px;">
-                    <input class="button" type="submit" value="Search">
+                    <input class="button" type="submit" value="ค้นหา">
                 </form>
                 <table class="table" id="datatable">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Vehicle</th>
-                            <th>Customer</th>
-                            <th>Start time</th>
-                            <th>End time</th>
-                            <th>Return status</th>
+                            <th>ยานพาหนะ</th>
+                            <th>ลูกค้า</th>
+                            <th>เวลาเริ่มต้น</th>
+                            <th>เวลาที่ต้องคืน</th>
+                            <th>สถานะการคืน</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -82,17 +82,22 @@
                             <td>{{i.end_time}}</td>
                             <td>
                                 {% if i.return_status %}
-                                rented
+                                คืนแล้ว
                                 {% else %}
-                                renting
+                                กำลังเช่า
                                 {% endif %}
                             </td>
                             <td>
-                                <a class="button is-info" href="{% url 'qr' i.id %}">view detail</a>
+                                <a class="button is-info" href="{% url 'qr' i.id %}">ดูรายละเอียด</a>
                                 {% if i.return_status %}
                                 {% else %}
-                                <a class="button is-danger" href="{% url 'cancle' i.id %}">cancle</a>
-                                <a class="button is-success" href="{% url 'approve' i.id %}">approve</a>
+                                <a class="button is-danger" href="{% url 'cancle' i.id %}">ยกเลิก</a>
+                                    {% if i.payment.pay_status %}
+                                    <a class="button is-success" href="{% url 'approve' i.id %}">คืนแล้ว</a>
+                                    {% else %}
+                                    <a class="button is-success" href="{% url 'check-paid' i.id %}">จ่ายแล้ว</a>
+                                    {% endif %}
+                                
                                 {% endif %}
 
                             </td>
