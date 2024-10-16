@@ -46,7 +46,7 @@
                                         <a href="{% url 'car-detail' car.id %}">
                                             <figure class="image is-4by3">
                                                 {% if car.image %}
-                                                <img src="{{ car.image.url }}" style="width: 100%; height: auto;">"
+                                                <img src="{{ car.image.url }}" style="max-width: 400px; max-height: 300px;">"
                                                 {% endif %}
                                             </figure>
                                         </a>
@@ -55,7 +55,6 @@
                                             <p class="title is-4">{{ car.name }}</p>
                                         </div>
                                         <div class="content">
-                                            
                                             <div>ที่นั่ง: {{ car.seat }}</div>
                                             <div>ราคาต่อชั่วโมง: {{ car.price_per_hour }} บาท</div>
                                             <div>ราคาต่อวัน: {{ car.price_per_day }} บาท</div>
