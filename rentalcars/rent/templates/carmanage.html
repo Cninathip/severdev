@@ -1,0 +1,101 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Manage Vehicle</title>
+</head>
+
+<body>
+    <div class="columns">
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+            <div style="padding: 10px;">
+                <a href=" {% url 'typecar-list' %} " class="button is-danger">Back</a>
+            </div>
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p style="color: white;"><b>{{user.username}}</b></p>
+                </div>
+                <br>
+                <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+
+        <div class="column"  style="padding-left: 300px;">
+            <section class="section">
+                <h1 class="title" id="title">Vehicle</h1>
+            </section>
+            <br>
+            <div class="container has-text-centered">
+                <form action="{% url 'employee' %}">
+                    <a href="{% url 'typecar-add' %}" class="button is-success">Add car type</a>
+                    <input class="input" type="text" name="search" placeholder="Search employee id / employee name"
+                        style="width: 300px;">
+                    <input class="button" type="submit" value="Search">
+                </form>
+                <table class="table" id="datatable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>number</th>
+                            <th>seat</th>
+                            <th>insurance</th>
+                            <th>price per hours</th>
+                            <th>price per days</th>
+                            <th>employee</th>
+                            <th>ความพร้อมใช้งาน</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in vehicle%}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i}}</td>
+                            <td>{{i.number}}</td>
+                            <td>{{i.seat}}</td>
+                            <td>{{i.insurance}}</td>
+                            <td>{{i.price_per_hour}}</td>
+                            <td>{{i.price_per_day}}</td>
+                            <td>{{i.employee}}</td>
+                            <td>
+                                {% if i.vehicle_status %}
+                                พร้อมใช้งาน
+                                {% else %}
+                                ส่งซ่อม
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <a class="button is-info" href="{% url 'car-detail' i.id %}">รายละเอียด</a>
+                                <a class="button is-warning" href="{% url 'car-edit' i.id %}">แก้ไข</a>
+                                <a class="button is-danger" href="{% url 'car-edit' i.id %}">ลบ</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+</body>
+
+</html>

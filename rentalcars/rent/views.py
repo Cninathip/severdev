@@ -138,6 +138,22 @@ class TypeCarDelete(View):
         typecar.delete()
         return redirect("typecar-list")
 
+class CarManageView(View):
+    def get(self, request):
+        query = request.GET
+        vehicle = Vehicle.objects.all().order_by("id")
+
+        if query.get("search"):
+            emp = emp.filter(
+                Q(id__icontains=query.get("search"))|
+                Q(name__icontains=query.get("search"))|
+                Q(number__icontains=query.get("search"))|
+                Q(type__icontains=query.get("search"))
+            )
+
+        return render(request, "carmanage.html", {
+            "vehicle": vehicle,
+        })
 
 class CarView(View):
     def get(self, request, pk):

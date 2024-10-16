@@ -18,6 +18,8 @@ urlpatterns = [
     path("check-paid/<int:pk>", views.RentPaid.as_view(), name="check-paid"),
     path("profile/change-password", views.ChangePasswordView.as_view(), name="change_password"),
 
+    path("car-manage", views.CarManageView.as_view(), name="car-manage"),
+
     path("employee", views.EmployeeView.as_view(), name="employee"),
     path("employee/<int:pk>", views.EmployeeEditView.as_view(), name="edit-employee"),
     path("employee/<int:pk>", views.KickEmployee.as_view(), name="kick-employee"),
