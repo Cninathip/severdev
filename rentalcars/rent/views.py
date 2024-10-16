@@ -250,24 +250,28 @@ class CarEditView(View):
         })
 
 class CarAdd(View):
-    def get(self, request, pk):
+    def get(self, request):
         form = VehicleForm()
         return render(request, "formcar.html", {
-            "form": form,
-            "pk":pk
+            "form": form
         })
     
-    def post(self, request, pk):
+    def post(self, request):
         form = VehicleForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
-            return redirect('car-list', pk=pk)
+            return redirect('car-manage')
 
         return render(request, "formcar.html", {
-            "form": form,
-            "pk":pk
+            "form": form
         })
+    
+class CarDelete(View):
+    def get(self, request, pk):
+        vehicle = Vehicle.objects.get(pk=pk)
+        vehicle.delete()
+        return redirect("car-manage")
 
 
 class EmployeeView(View):
@@ -333,7 +337,6 @@ class EmployeeEditView(View):
 class KickEmployee(View):
     def get(self, request, pk):
         emp = Employee.objects.get(pk=pk)
-        vehicle = Vehicle.objects.get(employee=emp)
         emp.delete()
 
         return redirect("employee")

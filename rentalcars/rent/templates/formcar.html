@@ -133,15 +133,9 @@
                             <div class="control">
                                 <input type="submit" class="button is-success" value="Save">
                             </div>
-                            {% if 'edit' in request.get_full_path %}
                             <div class="control">
-                                <a class="button is-danger" href="{% url 'car-detail' pk %}">Back</a>
+                                <a class="button is-danger" href="{% url 'car-manage' %}">Back</a>
                             </div>
-                            {% else %}
-                            <div class="control">
-                                <a class="button is-danger" href="{% url 'car-list' pk %}">Back</a>
-                            </div>
-                            {% endif %}
                         </div>
                     </div> 
                     </div>

@@ -41,7 +41,8 @@
             <br>
             <div class="container has-text-centered">
                 <form action="{% url 'employee' %}">
-                    <a href="{% url 'typecar-add' %}" class="button is-success">Add car type</a>
+                    <a href="{% url 'car-add'%}" class="button is-primary">Add car</a>
+                    <a href="{% url 'typecar-add' %}" class="button is-link">Add car type</a>
                     <input class="input" type="text" name="search" placeholder="Search employee id / employee name"
                         style="width: 300px;">
                     <input class="button" type="submit" value="Search">
@@ -50,13 +51,13 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>name</th>
-                            <th>number</th>
-                            <th>seat</th>
-                            <th>insurance</th>
-                            <th>price per hours</th>
-                            <th>price per days</th>
-                            <th>employee</th>
+                            <th>ชื่อรถ</th>
+                            <th>ทะเบียนรถ</th>
+                            <th>ประเภทรถ</th>
+                            <th>จำนวนที่นั่ง</th>
+                            <th>ประกัน</th>
+                            <th>ราคาต่อชม./วัน</th>
+                            <th>พนักงานที่ดูแล</th>
                             <th>ความพร้อมใช้งาน</th>
                             <th></th>
                         </tr>
@@ -67,10 +68,10 @@
                             <td>{{i.id}}</td>
                             <td>{{i}}</td>
                             <td>{{i.number}}</td>
+                            <td>{{i.type}}</td>
                             <td>{{i.seat}}</td>
                             <td>{{i.insurance}}</td>
-                            <td>{{i.price_per_hour}}</td>
-                            <td>{{i.price_per_day}}</td>
+                            <td>{{i.price_per_hour}}/{{i.price_per_day}} (บาท)</td>
                             <td>{{i.employee}}</td>
                             <td>
                                 {% if i.vehicle_status %}
@@ -83,7 +84,7 @@
                             <td>
                                 <a class="button is-info" href="{% url 'car-detail' i.id %}">รายละเอียด</a>
                                 <a class="button is-warning" href="{% url 'car-edit' i.id %}">แก้ไข</a>
-                                <a class="button is-danger" href="{% url 'car-edit' i.id %}">ลบ</a>
+                                <a class="button is-danger" href="{% url 'car-delete' i.id %}">ลบ</a>
                             </td>
                         </tr>
                         {% endfor %}
