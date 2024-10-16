@@ -364,7 +364,7 @@ class RentPaid(View):
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
         rent.payment.pay_status = True
-        rent.save()
+        rent.payment.save()
 
         return redirect("profile")
     

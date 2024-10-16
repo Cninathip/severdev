@@ -93,9 +93,9 @@
                                 {% else %}
                                 <a class="button is-danger" href="{% url 'cancle' i.id %}">ยกเลิก</a>
                                     {% if i.payment.pay_status %}
-                                    <a class="button is-success" href="{% url 'approve' i.id %}">คืนแล้ว</a>
+                                    <a class="button is-success" href="{% url 'approve' i.id %}">ยืนยันการคืนรถ</a>
                                     {% else %}
-                                    <a class="button is-success" href="{% url 'check-paid' i.id %}">จ่ายแล้ว</a>
+                                    <a class="button is-success" href="{% url 'check-paid' i.id %}">ยืนยันการจ่าย</a>
                                     {% endif %}
                                 
                                 {% endif %}

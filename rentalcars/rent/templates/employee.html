@@ -124,7 +124,11 @@
                     </div>
 
                     <br>
+                    {% if "edit" in request.get_full_path %}
+                    <input class="button" type="submit" value="Save">
+                    {% else %}
                     <input class="button" type="submit" value="Add">
+                    {% endif %}
                 </form>
             </div>
         </div>
