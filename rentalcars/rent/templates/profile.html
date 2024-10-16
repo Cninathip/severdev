@@ -88,6 +88,7 @@
                                 {% endif %}
                             </td>
                             <td>
+                                <a class="button is-info" href="{% url 'qr' i.id %}">view detail</a>
                                 {% if i.return_status %}
                                 {% else %}
                                 <a class="button is-danger" href="{% url 'cancle' i.id %}">cancle</a>
