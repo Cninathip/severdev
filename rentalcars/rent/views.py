@@ -318,4 +318,6 @@ class QRView(View):
         start_time = rent.start_time
         end_time = rent.end_time
         duration = end_time - start_time
-        return render(request, "qr.html", {"rent": rent, "duration": duration})
+        days = duration.days
+        hours = duration.seconds//3600
+        return render(request, "qr.html", {"rent": rent, "days": days, "hours": hours})
