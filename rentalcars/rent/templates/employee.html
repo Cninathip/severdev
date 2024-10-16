@@ -65,8 +65,12 @@
                             <td>{{i.email}}</td>
                             <td>{{i.position}}</td>
                             <td>
+                                {% if perms.rent.change_employee %}
                                 <a class="button is-warning" href="{% url 'edit-employee' i.id%}">แก้ไข</a>
+                                {% endif %}
+                                {% if perms.rent.delete_employee %}
                                 <a class="button is-danger" href="{% url 'kick-employee' i.id%}">ไล่ออก</a>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -124,10 +128,12 @@
                     </div>
 
                     <br>
-                    {% if "edit" in request.get_full_path %}
-                    <input class="button" type="submit" value="Save">
-                    {% else %}
-                    <input class="button" type="submit" value="Add">
+                    {% if perms.rent.add_employee %}
+                        {% if "edit" in request.get_full_path %}
+                        <input class="button" type="submit" value="Save">
+                        {% else %}
+                        <input class="button" type="submit" value="Add">
+                        {% endif %}
                     {% endif %}
                 </form>
             </div>

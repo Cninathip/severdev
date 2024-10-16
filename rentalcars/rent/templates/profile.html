@@ -88,15 +88,26 @@
                                 {% endif %}
                             </td>
                             <td>
+                                {% if perms.rent.view_payment %}
                                 <a class="button is-info" href="{% url 'qr' i.id %}">ดูรายละเอียด</a>
+                                {% endif %}
+
                                 {% if i.return_status %}
+                                    <!-- ไม่แสดงปุ่ม -->
                                 {% else %}
-                                <a class="button is-danger" href="{% url 'cancle' i.id %}">ยกเลิก</a>
-                                    {% if i.payment.pay_status %}
-                                    <a class="button is-success" href="{% url 'approve' i.id %}">ยืนยันการคืนรถ</a>
-                                    {% else %}
-                                    <a class="button is-success" href="{% url 'check-paid' i.id %}">ยืนยันการจ่าย</a>
+                                    {% if perms.rent.delete_rent %}
+                                    <a class="button is-danger" href="{% url 'cancle' i.id %}">ยกเลิก</a>
                                     {% endif %}
+                                    
+                                        {% if i.payment.pay_status %}
+                                            {% if perms.rent.change_rent %}
+                                            <a class="button is-success" href="{% url 'approve' i.id %}">ยืนยันการคืนรถ</a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if perms.rent.change_payment %}
+                                            <a class="button is-success" href="{% url 'check-paid' i.id %}">ยืนยันการจ่าย</a>
+                                            {% endif %}
+                                        {% endif %}
                                 
                                 {% endif %}
 

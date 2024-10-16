@@ -81,8 +81,9 @@ class ChangePasswordView(View):
         messages.success(request, "password change successfull. your new password would take effect on next login.")
         return redirect("profile")
 
-class TypeCarView(LoginRequiredMixin, View):
+class TypeCarView(LoginRequiredMixin, PermissionRequiredMixin, View):
     login_url = "/login/"
+    permission_required = ["rent.view_vehicletype"]
     
     def get(self, request):
         types = VehicleType.objects.order_by("id")
@@ -92,7 +93,10 @@ class TypeCarView(LoginRequiredMixin, View):
         })
     
 
-class TypeCarAdd(View):
+class TypeCarAdd(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.add_vehicletype"]
+
     def get(self, request):
         form = VehicleTypeForm()
         return render(request, "formtypecar.html", {
@@ -111,7 +115,10 @@ class TypeCarAdd(View):
         })
     
 
-class TypeCarUpdate(View):
+class TypeCarUpdate(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_vehicletype"]
+
     def get(self, request, pk):
         typecar = VehicleType.objects.get(pk=pk)
         form = VehicleTypeForm(instance=typecar)
@@ -132,13 +139,19 @@ class TypeCarUpdate(View):
         })
 
 
-class TypeCarDelete(View):
+class TypeCarDelete(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.delete_vehicletype"]
+
     def get(self, request, pk):
         typecar = VehicleType.objects.get(pk=pk)
         typecar.delete()
         return redirect("typecar-list")
 
-class CarManageView(View):
+class CarManageView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_vehicle", "rent.view_vehicle", "rent.delete_vehicle"]
+
     def get(self, request):
         query = request.GET
         vehicle = Vehicle.objects.all().order_by("id")
@@ -153,7 +166,10 @@ class CarManageView(View):
             "vehicle": vehicle,
         })
 
-class CarView(View):
+class CarView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.view_vehicle"]
+
     def get(self, request, pk):
         typecar = VehicleType.objects.get(pk=pk)
         search_date = request.GET.get("search_date")
@@ -186,7 +202,10 @@ class CarView(View):
             "car": car
         }
     
-class CarDetailView(View):
+class CarDetailView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.view_vehicle"]
+
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
         form = RentForm()
@@ -225,7 +244,10 @@ class CarDetailView(View):
             return redirect("qr", pk=rent.pk)
         return render(request, "cardetail.html", {"car": car, "form": form})
     
-class CarEditView(View):
+class CarEditView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_vehicle"]
+    
     def get(self, request, pk):
         car = Vehicle.objects.get(pk=pk)
         form = VehicleForm(instance=car)
@@ -247,7 +269,10 @@ class CarEditView(View):
             "pk":pk
         })
 
-class CarAdd(View):
+class CarAdd(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.add_vehicle"]
+
     def get(self, request):
         form = VehicleForm()
         return render(request, "formcar.html", {
@@ -265,14 +290,20 @@ class CarAdd(View):
             "form": form
         })
     
-class CarDelete(View):
+class CarDelete(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.delete_vehicle"]
+
     def get(self, request, pk):
         vehicle = Vehicle.objects.get(pk=pk)
         vehicle.delete()
         return redirect("car-manage")
 
 
-class EmployeeView(View):
+class EmployeeView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.view_employee"]
+
     def get(self, request):
         query = request.GET
         emp = Employee.objects.all().order_by("id")
@@ -302,7 +333,10 @@ class EmployeeView(View):
             "form": form
         })
     
-class EmployeeEditView(View):
+class EmployeeEditView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_employee"]
+
     def get(self, request, pk):
         query = request.GET
         emp = Employee.objects.all().order_by("id")
@@ -332,14 +366,19 @@ class EmployeeEditView(View):
             "form": form
         })
 
-class KickEmployee(View):
+class KickEmployee(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.delete_employee"]
+
     def get(self, request, pk):
         emp = Employee.objects.get(pk=pk)
         emp.delete()
 
         return redirect("employee")
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
+    login_url = "/login/"
+
     def get(self, request):
         query = request.GET
         rent = Rent.objects.all()
@@ -352,7 +391,10 @@ class ProfileView(View):
 
         return render(request, "profile.html", {"rent": rent})
     
-class RentApprove(View):
+class RentApprove(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_rent"]
+
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
         rent.return_status = True
@@ -360,7 +402,10 @@ class RentApprove(View):
 
         return redirect("profile")
     
-class RentPaid(View):
+class RentPaid(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.change_payment", "rent.change_rent"]
+
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
         rent.payment.pay_status = True
@@ -368,7 +413,9 @@ class RentPaid(View):
 
         return redirect("profile")
     
-class RentCancle(View):
+class RentCancle(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.delete_rent"]
 
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
@@ -376,7 +423,10 @@ class RentCancle(View):
 
         return redirect("profile")
     
-class QRView(View):
+class QRView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/login/"
+    permission_required = ["rent.view_payment"]
+
     def get(self, request, pk):
         rent = Rent.objects.get(pk=pk)
         start_time = rent.start_time

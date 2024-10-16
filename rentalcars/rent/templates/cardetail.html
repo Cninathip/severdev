@@ -65,8 +65,12 @@
                         {% csrf_token %}
                         {{ form }}
                         <br>
+                        {% if perms.rent.add_rent %}
                         <input type="submit" class="button is-success" value="Rent">
+                        {% endif %}
+                        {% if perms.rent.edit_vehicle %}
                         <a href="{% url 'car-edit' car.id %}" class="button is-warning">Edit</a>
+                        {% endif %}
                     </form>
                 </div>
 
