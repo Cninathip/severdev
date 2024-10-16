@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Manage Employees</title>
+</head>
+
+<body>
+    <div class="columns">
+        <aside class="column is-narrow" style="width: 200px; background-color: rgb(4, 10, 69); height: 102vh; position: fixed;">
+            <div style="padding: 10px;">
+                <a href=" {% url 'typecar-list' %} " class="button is-danger">Back</a>
+            </div>
+            <div class="menu has-text-centered">
+                <br>
+                <section>
+                    <a href="{% url 'profile' %}"><img src="/media/person.svg" style="width: 60px;" height="60px"></a>
+                </section>
+                <br>
+                <div class="item">
+                    <p style="color: white;"><b>{{user.username}}</b></p>
+                </div>
+                <br>
+                <a href="{% url 'logout' %}" class="button is-danger">Logout</a>
+            </div>
+        </aside>
+
+        <div class="column">
+            <div style="height: 200px; width: 200px; color: #ffffff;">QR</div>
+            
+        </div>
+
+        
+        
+
+        
+    </div>
+
+
+</body>
+
+</html>

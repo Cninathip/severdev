@@ -20,4 +20,5 @@ urlpatterns = [
     path("employee", views.EmployeeView.as_view(), name="employee"),
     
     path("detail/<int:pk>/paid", views.CarDetailView.as_view(), name="paid"),
+    path("/QR/<int:pk>", views.CarDetailView.as_view(), name="qr"),
 ]
