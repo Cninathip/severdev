@@ -20,7 +20,7 @@ class Login(View):
     def post(self, request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user() #ดึงข้อมูลผู้ใช้มาใส่ user
+            user = form.get_user() #ดึงข้อมูลผู้ใช้จาก form มา
             login(request,user)
             return redirect('typecar-list')  
 

@@ -27,4 +27,4 @@ urlpatterns = [
     path("logout/", Logout.as_view(), name="logout"),
     path("register/", Register.as_view(), name="register"),
     path('rent/', include("rent.urls")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #ช่วยชี้ไปที่ไฟล์ที่เก็บไว้ใน media ตอนเรียก .url
