@@ -1,8 +1,8 @@
 
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
+from django.contrib.auth.forms import AuthenticationForm
 from rent.models import *
 from .forms import *
 from django.db.models import Q
@@ -20,7 +20,7 @@ class Login(View):
     def post(self, request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user() #ดึงข้อมูลผู้ใช้มา
+            user = form.get_user() #ดึงข้อมูลผู้ใช้มาใส่ user
             login(request,user)
             return redirect('typecar-list')  
 
