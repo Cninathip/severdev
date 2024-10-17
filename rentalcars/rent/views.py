@@ -1,16 +1,15 @@
 
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rent.models import *
 from .forms import *
 from django.db.models import Q
 from django.utils.timezone import make_aware, get_current_timezone
 from datetime import datetime
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import Group
 
 class Login(View):
@@ -21,7 +20,7 @@ class Login(View):
     def post(self, request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user() 
+            user = form.get_user() #ดึงข้อมูลผู้ใช้มา
             login(request,user)
             return redirect('typecar-list')  
 

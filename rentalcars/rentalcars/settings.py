@@ -129,8 +129,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import os
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/' #กำหนดให้ url prefix ให้ไฟล์พวก media เมื่อ upload
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') #กำหนด dir สำหรับเก็บไฟล์
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
